@@ -1,7 +1,7 @@
 • Installed Apache Web Server using apt-get package manager tool
 	apt-get install apache2
 
-• verified that the server is running using 'service apache2' command
+• verified that the server is running using 'service' command
 	service apache2 status
 gives 'active' if the server is running successfully
 

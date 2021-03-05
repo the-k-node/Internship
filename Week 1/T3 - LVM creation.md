@@ -39,9 +39,12 @@ copy the UUID, edit '/etc/fstab' file to add a command to run on bootup
 • make the '/data' directory if it doesn't exists using 'mkdir' command, edit the file using simple text editors like vim or vi or nano
 	vi /etc/fstab
 and add 
-	UUID=<UUID got from blkid command> /dev/vg1/lvm1 xfs defaults 0 0
+	UUID=<UUID got from blkid command> /data xfs defaults 0 0
 at the end of the file to make sure it will be the last one to execute
 
 • Save the changes and mount the LV using
 	mount -a
 	mount | grep home
+
+• Verified by running 'df' command on the mount point:
+	df hT /data

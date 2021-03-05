@@ -1,10 +1,10 @@
 • Created users with defined usernames and passwords(temporarily) for intended group of users using 'adduser' or 'useradd' commands
 	adduser [username]
 
-• Created a User Group called 'interns' command 'groupadd'
+• Created a User Group called 'intern' command 'groupadd'
 	groupadd interns
 
-• Add the newly created users to 'interns' group using 'useradd' or 'adduser' or 'usermod' commands
+• Add the newly created users to 'intern' group using 'useradd' or 'adduser' or 'usermod' commands
 	adduser [username] interns
 	useradd -G interns [username]
 	usermod -a -G interns [username]
