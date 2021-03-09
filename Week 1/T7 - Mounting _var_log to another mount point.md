@@ -1,8 +1,8 @@
 • Added a separate disk to create a different mount point for /var/log files with 3G(size isn't mandatory), and made it into a lvm partition by:
-	1. Creating it into Physical volume ('pvcreate')
-	2. Creating a separate Volume Group to isolate this mount point ('vgcreate')
-	3. Creating lvm partition out of the attached disk space ('lvcreate')
-	4. Formatting the whole lvm using any file system. Here 'xfs' is used ('mkfs.xfs')
+1. Creating it into Physical volume ('pvcreate')
+2. Creating a separate Volume Group to isolate this mount point ('vgcreate')
+3. Creating lvm partition out of the attached disk space ('lvcreate')
+4. Formatting the whole lvm using any file system. Here 'xfs' is used ('mkfs.xfs')
 
 • Create a separate mount point by creating a directory like 'mkdir /test'.
 
