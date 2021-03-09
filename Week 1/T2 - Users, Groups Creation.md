@@ -3,6 +3,11 @@
 	adduser [username]
 	adduser [username]
 	```
+	
+	```bash
+	sudo apt-get update
+	sudo apt-get install git
+	```
 
 • Created a User Group called 'intern' command 'groupadd'
 	groupadd interns
