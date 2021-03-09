@@ -7,15 +7,21 @@
 • Create a separate mount point by creating a directory like 'mkdir /test'.
 
 • Mount the newly created lvm partition to it using 'mount' command.
-	mount /dev/vg2/lvmmount /test
+```bash
+mount /dev/vg2/lvmmount /test
+```
 
 • Copy all the contents of '/var/log' directory into '/test' (i.e into the 'lvmmount' partition) by using command 'rsync' which is used to sync contents of source directory into destination remotely.
-	rsync -axP /var/log/* /test
+```bash
+rsync -axP /var/log/* /test
+```
 
 • Check whether '/test' is correctly mounted and has contents of '/var/log' directory or not using 'df -hT' & 'ls' commands.
 
 • Unmount the '/test' point and edit '/etc/fstab' file to make that mount persistent across reboots.
-	vi /etc/fstab
+```bash
+vi /etc/fstab
+```
 
 • Add the line '/dev/mapper/vg2-lvmmount /test /xfs defaults 0 0' at the end of the file and save it. Run this file using 'mount -a' command
 
