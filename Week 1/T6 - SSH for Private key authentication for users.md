@@ -7,7 +7,7 @@ here, 'openssh-server' is the package name of the SSH server
 • Generate pair of SSH keys (Public and Private) in Client Machine (or local device) using command 'ssh-keygen'
 ```bash
 ssh-keygen
-``
+```
 
 • Location, Passphrase are optional and are better to opt for increased security with passphrase
 
