@@ -20,7 +20,7 @@ ls -a
 ```bash
 cd .ssh
 ls
-``
+```
 this shows the keys inside '.ssh' directory, navigate back to root
 
 • Now we have to configure the VM's network settings, so that we could remote login using another VM or device.
