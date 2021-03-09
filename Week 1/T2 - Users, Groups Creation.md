@@ -1,6 +1,7 @@
 • Created users with defined usernames and passwords(temporarily) for intended group of users using 'adduser' or 'useradd' commands
 	```bash
 	adduser [username]
+	adduser [username]
 	```
 
 • Created a User Group called 'intern' command 'groupadd'
