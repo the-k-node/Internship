@@ -6,7 +6,7 @@
 
 • Get the DHCP assigned address from server using 'ifconfig' or 'ip addr show' commands and enter it into the 'Guest IP' field in 'Port Forwarding' section.
 
-Name - SSH, Protocol - TCP, Host IP - 127.0.0.1, Host Port - 2200, Guest IP - 192.168.1.4 (in my case, changes depending on the CIDR entered and DHCP), Guest Port - 22
+    Name - SSH, Protocol - TCP, Host IP - 127.0.0.1, Host Port - 2200, Guest IP - 192.168.1.4 (in my case, changes depending on the CIDR entered and DHCP), Guest Port - 22
 
 • Save the preferences and check SSH feature to verify that it's still working.
 
