@@ -4,13 +4,18 @@ adduser [username]
 ```
 	
 • Created a User Group called 'intern' command 'groupadd'
-	groupadd interns
-
+```bash
+groupadd interns
+```
 • Add the newly created users to 'intern' group using 'useradd' or 'adduser' or 'usermod' commands
-	adduser [username] interns
-	useradd -G interns [username]
-	usermod -a -G interns [username]
+```bash
+adduser [username] interns
+useradd -G interns [username]
+usermod -a -G interns [username]
+```
 here '-a' option acts as append, if not used user might be dropped from other groups
 
 • Verified users and their associated groups using 'id' command
-	id [username]
+```bash
+id [username]
+```
