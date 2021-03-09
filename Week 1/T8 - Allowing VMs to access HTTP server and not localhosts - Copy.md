@@ -12,4 +12,4 @@
 
 • Now, to check the server is accessed only through VM IPs, go to client VM and ping the address of server and vice-versa. But doesn't work with outside hosts or localhost
 
-• Now open the server page in client system to verify the restrictions set, if it works in client VM and doesn't work in other hosts, then requirement is met.
+• Now, open the server page in client system to verify the restrictions set, if it works in client VM and doesn't work in other hosts, then requirement is met.
