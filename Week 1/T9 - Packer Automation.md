@@ -1,6 +1,8 @@
-* Download or Install `Packer` from [here] (https://www.packer.io/downloads) or install using `brew` (you need 'homebrew' package manager from [here] (```bash 
+* Download or Install `Packer` from [here] (https://www.packer.io/downloads) or install using `brew` (you need 'homebrew' package manager from 
+```bash 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```) for using 'brew' command)
+```
+for using 'brew' command)
 ```bash
 brew install packer
 ```
