@@ -13,7 +13,37 @@ packer version
 ```
 if this command returns some version number of packer, then Packer has installed properly else try redoing the above step.
 
-* Once verified, make a directory structure
+* Once verified, make a directory structure and create files as
+    ```
+    build.json
+    http --> preseed.cfg
+    ```
+
+* Create `build.json` file with basic 3 fields that can be used by Packer, they are 
+    1. builders
+    2. provisioners
+    3. post-processers
+these are used for respective specifications for creating template automatically by Packer.
+
+* Other than those basic 3 fields, we can also have `variables` field to have user defined variables and later can access using
+```bash
+{{user `<user-variable-name>`}}
+```
+
+* We need a `preseed.cfg` file with required configuration commands to automate the complete installation of the ubuntu-server for this task.
+
+* `debian-installer` is the available manager to automate the fields / screens that we intend in installing our server operating system on a new VM.
+
+* We can use`d-i` to access the required files defined in debian repository and the required configuration commands are specified in [here](./http/preseed.cfg) .
+
+* After configuring all required commands, we need to use `build` option in packer to start building the scripts we put together
+```bash
+packer build build.json
+```
+
+* This will create the vm with specified `vm_name` in build file and all specifications specified in the [this](./build.json) file.
+
+* Once installation is done, we can verify all the specifictions and settings specified in the config files, and that's the automation task done using HashiCorp's Packer.
 
 * References :
 
