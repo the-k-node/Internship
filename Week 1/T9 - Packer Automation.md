@@ -34,14 +34,14 @@ these are used for respective specifications for creating template automatically
 
 * `debian-installer` is the available manager to automate the fields / screens that we intend in installing our server operating system on a new VM.
 
-* We can use`d-i` to access the required files defined in debian repository and the required configuration commands are specified in [here](./http/preseed.cfg) .
+* We can use`d-i` to access the required files defined in debian repository and the required configuration commands are specified in [here](./Packer/http/preseed.cfg) .
 
 * After configuring all required commands, we need to use `build` option in packer to start building the scripts we put together
 ```bash
 packer build build.json
 ```
 
-* This will create the vm with specified `vm_name` in build file and all specifications specified in the [this](./build.json) file.
+* This will create the vm with specified `vm_name` in build file and all specifications specified in the [this](./Packer/build.json) file.
 
 * Once installation is done, we can verify all the specifictions and settings specified in the config files, and that's the automation task done using HashiCorp's Packer.
 
