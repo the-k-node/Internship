@@ -22,6 +22,10 @@
     
     and Save it
 
+* Go to the settings of each VM, and select `Network` tab, here you can see the `Attached to` selection will be (most probably) `NAT`, change it to `NAT Network` and in `Name` select the newly created NAT network (in my case `KNAT`). Do this step for as many as VMs that we need to communicate with each other.
+
+* The above step is performed to make the VMs to have same Network ID to be on same LAN network to facilitate the communication among them through NAT(Network Address Translation) network having DHCP enabled to generate unique IP to all the VMs of that network (If one more VM added to the network, it would get an IP 192.168.1.6 as .4 and .5 are already assigned).
+
 * Now start the VMs, and after they get booted-up, open terminal and check for the IPs assigned using either `ifconfig` or `ip add show`, and check the IP assigned for Ethernet adapter which might have an id starting with `enp0s*`. 
     Mine were: 
     ```
