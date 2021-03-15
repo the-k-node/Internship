@@ -19,7 +19,8 @@ VM1<->VM3 ( via VM2 as router )
 
 3. NAT on router VM
     * Create 3 VMs and connect them as #2
-    * Router VM (i.e VM2) will accept connections on its own IP and port 2222 and forward the packets to VM3 on port 22
+    * Router VM (i.e VM2) will accept connections on its own IP and port 2222 and forward the packets to VM3 on port 22.
+
     example: 
     ```
     VM1 connects to  VM2 port 2222
