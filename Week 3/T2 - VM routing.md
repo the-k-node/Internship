@@ -121,6 +121,15 @@
     ip route
     ```
     command.
+    
+* Now, edit `/etc/sysctl.conf` file and uncomment a line with
+    ```bash
+    net.ipv4.ip_forward=1
+    ```
+    and save & load the changes using 
+    ```bash
+    sudo sysctl -p /etc/sysctl.conf
+    ```
 
 * Now verify the host reachability using `ping` command using VMs IP addresses as per needed connectivity:
     * VM1 <-> VM2(router)
