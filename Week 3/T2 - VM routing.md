@@ -34,6 +34,7 @@
     ```yaml
     network:
         version: 2
+        renderer: networkd
         ethernets:
             enp0s8:             #interface with intnet_a internal network
                 dhcp4: no
@@ -62,6 +63,7 @@
             * to: 192.168.10.0/24 network
     ```yaml
     network:
+        renderer: networkd
         version: 2
         ethernets:
             enp0s3:             #interface with intnet_a internal network
@@ -93,6 +95,7 @@
             * through hop: 192.168.20.5
     ```yaml
     network:
+        renderer: networkd
         version: 2
         ethernets:
             enp0s8:             #interface with intnet_b internal network
