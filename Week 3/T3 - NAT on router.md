@@ -1,138 +1,62 @@
-* We need an Internal network with VMs to establish 2 LANs and communicate among them.
+* Port Forwarding using NAT table can be achieved by 2 ways:
+    * editing `/etc/iptables/rules.v4` file
+    * running `iptables` commands
 
-* Configure VM1 and VM3 as end hosts and VM2 as router by making required settings like
-
-    VM1:
-    Adapter | Network | Network Name
-    :---: | :---: | :---:
-    1 | `Internal Network` | `intnet_a`
-
-    VM2:
-    Adapter | Network | Network Name
-    :---: | :---: | :---:
-    1 | `Internal Network` | `intnet_a`
-    2 | `Internal Network` | `intnet_b`
-
-    VM3:
-    Adapter | Network | Network Name
-    :---: | :---: | :---:
-    1 | `Internal Network` | `intnet_b`
-
-    just to make sure we will have two different networks
-
-* For later versions of Ubuntu, we use `netplan` network configurations to configure all network interfaces and routes we require, for that we need to edit the `/etc/netplan/<yaml file>`, here the yaml file's name is different for different versions of ubuntu using
-
-* The yaml configurations we need to make for each VM are:
-    
-    VM1:
-    static IP: 192.168.10.4
-    gateway: 192.168.10.1
-    Routes: 
-        packets
-            * to: 192.168.20.0/24 network
-            * through hop: 192.168.10.5
-    ```yaml
-    network:
-        version: 2
-        ethernets:
-            enp0s8:             #interface with intnet_a internal network
-                dhcp4: no
-                addresses:
-                    - 192.168.10.4/24
-                gateway4: 192.168.10.1
-                routes:
-                    - to: 192.168.20.0/24
-                      via: 192.168.10.5
-                      metric: 100
-    ```
-    VM2:
-    static IP: 
-        enp0s3 
-            * adapter : 192.168.10.5
-            * gateway : 192.168.10.1
-        enp0s8 
-            * adapter : 192.168.20.5
-            * gateway : 192.168.20.1
-    Routes: 
-        VM1 packets
-            * from: 192.168.10.1 gateway
-            * to: 192.168.20.0/24 network
-        VM3 packets
-            * from: 192.168.20.1 gateway
-            * to: 192.168.10.0/24 network
-    ```yaml
-    network:
-        version: 2
-        ethernets:
-            enp0s3:             #interface with intnet_a internal network
-                dhcp4: no
-                addresses:
-                    - 192.168.10.5/24
-                gateway4: 192.168.10.1
-                routes:
-                    - to: 192.168.10.0/24
-                      via: 192.168.20.1
-                      metric: 100
-            enp0s8:             #interface with intnet_b internal network
-                dhcp4: no
-                addresses:
-                    - 192.168.20.5/24
-                gateway4: 192.168.20.1
-                routes:
-                    - to: 192.168.20.0/24
-                      via: 192.168.10.1
-                      metric: 100
-    ``` 
-
-    VM3:
-    static IP: 192.168.10.4
-    gateway: 192.168.10.1
-    Routes: 
-        packets
-            * to: 192.168.10.0/24 network
-            * through hop: 192.168.20.5
-    ```yaml
-    network:
-        version: 2
-        ethernets:
-            enp0s8:             #interface with intnet_b internal network
-                dhcp4: no
-                addresses:
-                    - 192.168.20.4/24
-                gateway4: 192.168.20.1
-                routes:
-                    - to: 192.168.10.0/24
-                      via: 192.168.20.5
-                      metric: 100
-    ```
-
-* To make them work, save the files & apply the settings using
+* We initially need to have a tool called `iptables-persistent` for having the table persistent across reboots, for installing the tool, run
     ```bash
-    sudo netplan apply
-    ``` 
-    command and restart the network service with
-    ```bash
-    service systemd-networkd restart
+    sudo apt install -y iptables-persistent
     ```
-    command and check whether the routes are added correctly using
+    this tools also creates a file for specifying all the rules we need to set or modify at `/etc/iptables/` both for IPv4 & IPv6.
+
+* In VM2 (router), I want to make the interface `enp0s8` to forward traffic received from VM1 through VM2's PORT `2222` , for that I need to have chains specified in NAT table
+
+* We can add required rules as chains in NAT table using `iptables` command or edit `/etc/iptables/rules.v4` (as version4 addresses are used here)
+
+* We have 3 main chains to be added in our router 
+    ```md
+    * PREROUTING
+    * FORWARD
+    * POSTROUTING
+    ```
+    the commands used and changes made to `rules.v4` file are:
     ```bash
-    route -n
+    -A FORWARD -i enp0s3 -o enp0s8 -p tcp --syn -n conntrack --ctstate NEW -j ACCEPT
+    -A FORWARD -i enp0s3 -o enp0s8 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+    -A FORWARD -i enp0s8 -o enp0s3 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+    COMMIT
+
+    *nat
+    :PREROUTING ACCEPT [0:0]
+    :INPUT ACCEPT [0:0]
+    :OUTPUT ACCEPT [0:0]
+    :POSTROUTING ACCEPT [0:0]
+
+    -A PREROUTING -i enp0s3 -p tcp -j DNAT --to-destination 192.168.20.5:2222
+    -A POSTROUTING -d 192.168.20.0/24 -o enp0s8 -p tcp --dport 2222 -j SNAT --to-source 192.168.20.5:2222
+    ```
+    here, 
+    * `enp0s3` : network interface to receive/send traffic from VM1
+    * `enp0s8` : network interface to receive/send traffic from VM2
+    * `-p` is used to specify the protocol, here it's `tcp`
+    * `DNAT` (Destination NAT) is to change the destination address for the packet that VM2 receives from VM1, and we specify `--to-destination` for specifying the IP address / network / with port
+    * PREROUTING works when interface sends the packets to modify the destination
+    * POSTROUTING works when the packet returns from the destination to the source, here we need to change the source into destination and vice-versa, so we specify it using `SNAT` - Source NAT. This can also be achieved using `MASQUEARADE` by changing line into:
+        ```bash
+        -A POSTROUTING ! -d 192.168.20.0/24 -o enp0s8 -j MASQUERADE
+        ```
+
+*After the changes are made, run
+    ```bash
+    iptables restore -t < /etc/iptables/rules.v4
+    ```
+    command, if this returns no syntactical errors, then we can verify the results using 
+    ```bash
+    iptables -S                 #shows rules
+    or 
+    iptables -L                 #shows rules in table format 
     or
-    ip route
+    iptables -t nat             #shows rules from only NAT table
+    or
+    iptables -t nat -vnL        #shows rules with many metrics
     ```
-    command.
-
-* Now verify the host reachability using `ping` command using VMs IP addresses as per needed connectivity:
-    * VM1 <-> VM2(router)
-    VM1 : `ping 192.168.10.5`
-    VM2 : `ping 192.168.10.4`
-
-    * VM2 (router) <-> VM3
-    VM2 : `ping 192.168.20.4`
-    VM3 : `ping 192.168.20.5`
-
-    * VM1 <-> VM3 through Router VM2
-    VM1 : `ping 192.168.20.4`
-    VM3 : `ping 192.168.10.4`
-
-    check whether all the ping commands return no packet loss and receives all packets.
+    commands.
