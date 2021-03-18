@@ -45,7 +45,7 @@
         -A POSTROUTING ! -d 192.168.20.0/24 -o enp0s8 -j MASQUERADE
         ```
 
-*After the changes are made, run
+* After the changes are made, run
     ```bash
     iptables restore -t < /etc/iptables/rules.v4
     ```
