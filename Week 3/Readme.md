@@ -37,8 +37,9 @@ Topic : Network basics
 
 6. Final Task
     Implement the topology:
-    [!alt text]
+    ![alt text]
     (https://github.com/alwaysiamkk/Internship/blob/main/Week%203/Week3.png "Topology diagram")
+    
     Note: 
     Establish BGP Sessions between below pairs:
         1. vm-1 <-> vm-router
