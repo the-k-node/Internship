@@ -1,5 +1,5 @@
 * Topology asked to establish was
-    ![alt text](https://github.com/alwaysiamkk/Internship/blob/main/Week3.png "BGP Network Topology")
+    ![alt text](https://github.com/alwaysiamkk/Internship/blob/main/Week%203/Week3.png "BGP Network Topology")
 
 * Here we can observer the topology of VMs and its interfaces, for configuring BGP, I consider eBGP (external Border Gateway Protocol) to be my choice.
 
