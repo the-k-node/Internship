@@ -37,8 +37,7 @@ Topic : Network basics
 
 6. Final Task
     Implement the topology:
-    ![alt text]
-    (https://github.com/alwaysiamkk/Internship/blob/main/Week%203/Week3.png "Topology diagram")
+    ![alt text](https://github.com/alwaysiamkk/Internship/blob/main/Week%203/Week3.png "Topology diagram")
     
     Note: 
     Establish BGP Sessions between below pairs:
