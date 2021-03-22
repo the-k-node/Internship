@@ -116,6 +116,9 @@
         (config-router)#neighbor 172.10.0.2 prefix-list IN_RFIL in
         ```
 
+* So the solution topology would be :
+    ![alt text](https://github.com/alwaysiamkk/Internship/blob/main/Week%203/w3%20task6.%20solution%20topology.png "Solution Topology Diagram")
+
 * Finally to verify our complete task, test using `ping` between
     * `vm-1` : 
         ```
