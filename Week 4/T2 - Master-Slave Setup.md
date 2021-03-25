@@ -43,9 +43,9 @@
         ```
         and note the values of `File` and `Position` fields of the output, mine are
         
-            File | Position
-            :---: | :---:
-            mysql-bin.000001 | 616
+        File | Position
+        :---: | :---:
+        mysql-bin.000001 | 616
 
 * Now in SLAVE server (newly created VM):
     * Make configurations
