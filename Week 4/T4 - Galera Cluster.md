@@ -121,7 +121,7 @@
     # systemctl start mariadb
     # mysql -uroot -p -e "SHOW STATUS LIKE 'wsrep_cluster_size'"
     ```
-    this should give the output of value 2 by adding this node to that cluster
+    this should give the output of value 3 by adding this node to that cluster
     Variable_name | Value
     :---: | :---:
     wsrep_cluster_size | 3
