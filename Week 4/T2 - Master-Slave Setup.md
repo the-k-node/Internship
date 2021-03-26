@@ -2,8 +2,8 @@
 
 * Static IP addresses that I have configured are 
     ```
-    Master : 172.10.0.10/24
-    Slave : 172.10.0.11/24  
+    Master : 172.10.0.101/24
+    Slave : 172.10.0.102/24  
     ```
 
 * In MASTER Server (the one we configured before):
@@ -45,7 +45,7 @@
         
         File | Position
         :---: | :---:
-        mysql-bin.000001 | 616
+        mysql-bin.000001 | 888
 
 * Now in SLAVE server (newly created VM):
     * Make configurations
@@ -78,7 +78,7 @@
         ```
         then enter the details of the master including the output we received earlier
         ```sql
-        > CHANGE MASTER TO MASTER_HOST = '172.10.0.10', MASTER_USER = 'knode1', MASTER_PASSWORD = 'kiran', MASTER_LOG_FILE = 'mysql-bin.000001', MASTER_LOG_POS = 616;
+        > CHANGE MASTER TO MASTER_HOST = '172.10.0.101', MASTER_USER = 'knode1', MASTER_PASSWORD = 'kiran', MASTER_LOG_FILE = 'mysql-bin.000001', MASTER_LOG_POS = 888;
         ```
         then
         ```sql

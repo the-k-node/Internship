@@ -2,9 +2,9 @@
 
 * Static IP addresses and alias names for servers that I have configured are
     ```
-    node1 : 172.10.0.10/24              #master1 from previous task
-    node2 : 172.10.0.11/24              #master2 from previous task
-    node3 : 172.10.0.12/24              #new node for galera cluster
+    node1 : 172.10.0.101/24              #master1 from previous task
+    node2 : 172.10.0.102/24              #master2 from previous task
+    node3 : 172.10.0.103/24              #new node for galera cluster
     ```
 
 * When we installed `mariadb-server` and `mariadb-client`, `galera` was automatically gets installed for versions > 10.1. So we don't need to install anything new.
@@ -24,13 +24,13 @@
 
         # Galera Cluster Configuration
         wsrep_cluster_name="galera_cluster"
-        wsrep_cluster_address="gcomm://172.10.0.10,172.10.0.11,172.10.0.12"
+        wsrep_cluster_address="gcomm://172.10.0.101,172.10.0.102,172.10.0.103"
 
         # Galera Synchronization Configuration
         wsrep_sst_method=rsync
 
         # Galera Node Configuration
-        wsrep_node_address="172.10.0.10"
+        wsrep_node_address="172.10.0.101"
         wsrep_node_name="node1"
         ```
     
@@ -48,13 +48,13 @@
 
         # Galera Cluster Configuration
         wsrep_cluster_name="galera_cluster"
-        wsrep_cluster_address="gcomm://172.10.0.10,172.10.0.11,172.10.0.12"
+        wsrep_cluster_address="gcomm://172.10.0.101,172.10.0.102,172.10.0.103"
 
         # Galera Synchronization Configuration
         wsrep_sst_method=rsync
 
         # Galera Node Configuration
-        wsrep_node_address="172.10.0.11"
+        wsrep_node_address="172.10.0.102"
         wsrep_node_name="node2"
         ```
     
@@ -72,13 +72,13 @@
 
         # Galera Cluster Configuration
         wsrep_cluster_name="galera_cluster"
-        wsrep_cluster_address="gcomm://172.10.0.10,172.10.0.11,172.10.0.12"
+        wsrep_cluster_address="gcomm://172.10.0.101,172.10.0.102,172.10.0.103"
 
         # Galera Synchronization Configuration
         wsrep_sst_method=rsync
 
         # Galera Node Configuration
-        wsrep_node_address="172.10.0.12"
+        wsrep_node_address="172.10.0.103"
         wsrep_node_name="node3"
         ```
     
