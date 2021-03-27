@@ -79,4 +79,4 @@ Note : These steps should be done for all nodes present in the Cluster
     ```sql
     > SELECT VERSION();
     ```
-    which should return `10.5.6` version of `mariadb` and also verify the `checksum` value which should be same as in previous stages (mine is : `991005604`)
+    which should return `10.5.9` version of `mariadb` and also verify the `checksum` value which should be same as in previous stages (mine is : `991005604`)
