@@ -12,12 +12,12 @@ Topic: DB Basics
 2. On an another VM install MariaDB and configure it as the slave of the MariaDB installed in above step.
 3. Convert this setup into Master Master replication b/w both the VMs.
 4. Convert this setup into two nodes Galera clusters and then add another node to this cluster.
-5. Take Physical backup from one node to a local or remote location and start a docker on it and compare the checksum of the table.
-6. Upgrade the Galera cluster from 10.5.6 to 10.5.9.
+5.  1. Take Physical backup from one node to a local or remote location and start a docker on it and compare the checksum of the table.
+    2.Upgrade the Galera cluster from 10.5.6 to 10.5.9.
 
     _on all the steps above, the checksum for the table should not change, checksum can be checked using `checksum table ngnix_access_log;`_
 
-7. Use MariaDB Queries to provide the stats below
+6. Use MariaDB Queries to provide the stats below
     1. summary for the day/week/month:
     
         ```
@@ -43,5 +43,5 @@ Topic: DB Basics
     7. get all the requests in the specified timestamp (Ex: from 06/Mar/2021:04:48 to 06/Mar/2021:04:58)
 
 
-8. Create partitioning on this table using the time values, the table should have weekly partitions.
-9. Truncate the partitions from week 21 to 25;
+7. Create partitioning on this table using the time values, the table should have weekly partitions.
+8. Truncate the partitions from week 21 to 25;
