@@ -10,7 +10,7 @@ In this task, we have 2 parts:
 ## Upgradation
 > from version 10.5.6 to 10.5.9
 
-````
+```
 Note : These steps to be done for all nodes present in the Cluster
 ```
 
