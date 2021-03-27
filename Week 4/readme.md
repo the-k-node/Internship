@@ -13,7 +13,7 @@ Topic: DB Basics
 3. Convert this setup into Master Master replication b/w both the VMs.
 4. Convert this setup into two nodes Galera clusters and then add another node to this cluster.
 5.  1. Take Physical backup from one node to a local or remote location and start a docker on it and compare the checksum of the table.
-    2.Upgrade the Galera cluster from 10.5.6 to 10.5.9.
+    2. Upgrade the Galera cluster from 10.5.6 to 10.5.9.
 
     _on all the steps above, the checksum for the table should not change, checksum can be checked using `checksum table ngnix_access_log;`_
 
