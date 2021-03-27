@@ -11,7 +11,7 @@ In this task, we have 2 parts:
 > from version 10.5.6 to 10.5.9
 
 ```
-Note : These steps to be done for all nodes present in the Cluster
+Note : These steps should be done for all nodes present in the Cluster
 ```
 
 * Before proceeding to the upgradation, as a caution we need to have a full backup of the current database.
@@ -24,8 +24,8 @@ Note : These steps to be done for all nodes present in the Cluster
       --password=<user-password> --target-dir=<destination-dir>
     ```
     here, we use `mysql` credentials that we generally use for logining into the database SQL shell like in my case,
-        * user-name : root
-        * destination-dir : /home/kiran/upgrade_backup/
+    * user-name : root
+    * destination-dir : /home/kiran/upgrade_backup/
     then the backup has to prepared using
     ```bash
     $ sudo mariadb-backup --prepare \
