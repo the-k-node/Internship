@@ -1,10 +1,11 @@
 ## MariaDB Queries to provide the stats
 
 1.  summary for the day/week/month:
-    1.   highest requested host
+
+    1.  highest requested host
         ```sql
         select host, count(host) as times FROM ngnix_access_log group by host order by times desc limit 1;
-            or
+        / - or - /
         select max(host) as host, count(host) as times from ngnix_access_log group by host order by times desc limit 1;
         ```
 
@@ -18,7 +19,7 @@
         select LEFT(path,LOCATE('/',path, 2)+LOCATE('/',path, 3)-1) as pathh , count(LEFT(path,LOCATE('/',path, 2)+LOCATE('/',path, 3)-1)) as times from ngnix_access_log group by pathh order by times desc limit 1;
         ```
 
-2.    total requests per status code (Ex: count of requests returning 404/ 401/502/504/500/200)
+2.  total requests per status code (Ex: count of requests returning 404/ 401/502/504/500/200/)
 
     ```sql
     select statusCode, count(statusCode) as times from ngnix_access_log group by statusCode order by times;
@@ -88,15 +89,15 @@
 6.  get all the requests taking more than 2/5/10 secs to respond.
     1.  more than 2 seconds :
 
-            ```sql
-            select host, ip, responseTime from ngnix_access_log where responseTime>2 group by responseTime order by responseTime limit 10;
-            ```
+        ```sql
+        select host, ip, responseTime from ngnix_access_log where responseTime>2 group by responseTime order by responseTime limit 10;
+        ```
 
     2.  more than 5 seconds :
 
-            ```sql
-            select host, ip, responseTime from ngnix_access_log where responseTime>5 group by responseTime order by responseTime limit 10;
-            ```
+        ```sql
+        select host, ip, responseTime from ngnix_access_log where responseTime>5 group by responseTime order by responseTime limit 10;
+        ```
 
     3.  more than 10 seconds :
 
