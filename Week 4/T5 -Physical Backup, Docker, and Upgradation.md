@@ -28,6 +28,11 @@ In this task, we have 2 parts:
     ```
     on the last line, `,` indicates that in case of `node3` unavailability, it can check on my other nodes to make it as my donor node. All the above configurations are mainly used by normal mariabackup sst.
 
+* We also need a user in `mysql` shell with the username : `kiran` and password : `kiran` and have privileges to reload, process, alter, lock tables, log, so after creating the user, we should grant them like
+    ```sql
+    GRANT RELOAD, PROCESS, ALTER, LOCK TABLES, BINLOG MONITOR ON *.* TO `kiran`@`%` IDENTIFIED BY PASSWORD 'kiran';
+    ```
+
 * Now, for storing the physical backup in `node3` and initiating the backup using `mariabackup`, we do
     ```bash
     $ sudo mkdir /home/kiran/pbackup
