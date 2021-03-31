@@ -45,6 +45,15 @@
     $ ssh-copy-id 172.10.10.203         #copies the public key to 'm-node-3'
     ```
     and enter the password configured for the user `kiran` in each node, and thus adds public key of `control-node` to all nodes to facilitate ssh connection.
+* Before veriffying the ssh connections through ansible, we have to mention all our managed nodes IPs/FQDNs in a inventory file, default file will be located in `/etc/ansible/hosts`, he you can mention IPs and also create groups of nodes
+    ```
+    [nodes]
+    172.10.10.201
+    172.10.10.202
+    172.10.10.203
+    ```
+    here, `nodes` is the group name which has all the below mentioned nodes in it, and I can just mention `nodes` to mention those nodes than separately entering IPs/FQDNs.
+
 
 * Test the Ansible's ssh connection through `ping` option
     ```bash
