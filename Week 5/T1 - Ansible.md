@@ -64,7 +64,7 @@
 
 * For running a command on the managed-nodes, I have considered 2 commands, `hostname` which gives the name of the nodes, and `hostname -I` which gives the IP addresses of nodes. For achieving that, I need to create a new `yaml` file for my ansible `playbook` with contents (indentation is important).
 
-    task1.yml :
+    [task1.yml](https://github.com/alwaysiamkk/Internship/blob/main/Week%205/task1.yml) :
     ```yaml
     ---
     - name: Get Nodes Names and IPs
@@ -79,8 +79,6 @@
           lineinfile:
             dest: /home/kiran/Documents/output
             line: "{{ output1.stdout }}"
-            insertafter: EOF
-          delegate_to: localhost
         - name: Node IPs
           command: hostname -I
           register: output2
@@ -88,8 +86,6 @@
           lineinfile:
             dest: /home/kiran/Documents/output
             line: "{{ output2.stdout }}"
-            insertafter: EOF
-          delegate_to: localhost
     ```
     here, I have 2 main commands as stated before and storing the output of those commands using another task named `output_write_node_name` and `output_write_node_ip` which take the ouput of commands using the value of `register` and using that in `line` with deserializing the main pack and taking only `stdout` which is our output and this file is named as `ans_conf.yml` in my present working directory(`/home/kiran/Documents/ans_conf.yml`).
 
