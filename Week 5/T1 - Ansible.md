@@ -8,7 +8,8 @@
     ```bash
     $ sudo apt-get update 
     $ sudo apt-get install software-properties-common 
-    $ sudo apt-add-repository ppa:ansible/ansible $ sudo apt-get update 
+    $ sudo apt-add-repository ppa:ansible/ansible 
+    $ sudo apt-get update 
     $ sudo apt-get install ansible
     ```
     and verify the installation using `ansible version` command
@@ -61,7 +62,9 @@
     ```
     and if this returns `SUCCESS` for each node or returns `"ping": "pong"` for each node, then the connection is successful.
 
-* For running a command on the managed-nodes, I have considered 2 commands, `hostname` which gives the name of the nodes, and `hostname -I` which gives the IP addresses of nodes. For achieving that, I need to create a new `yaml` file for my ansible `playbook` with contents (indentation is important)
+* For running a command on the managed-nodes, I have considered 2 commands, `hostname` which gives the name of the nodes, and `hostname -I` which gives the IP addresses of nodes. For achieving that, I need to create a new `yaml` file for my ansible `playbook` with contents (indentation is important).
+
+    task1.yml :
     ```yaml
     ---
     - name: Get Nodes Names and IPs
