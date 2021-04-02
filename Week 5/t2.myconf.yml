@@ -1,0 +1,8 @@
+---
+- name: Copying custom Mariadb config file
+  hosts: nodes
+  become: true
+  become_method: sudo
+  serial: 1
+  roles:
+    - mysqlcon
