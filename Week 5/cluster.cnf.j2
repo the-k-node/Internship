@@ -1,0 +1,31 @@
+[mysqld]
+#Cluster node and cluster configurations
+wsrep_cluster_address="gcomm://172.10.10.201,172.10.10.202,172.10.10.203"
+wsrep_node_address="{{ ans_host_add }}"
+wsrep_node_name="{{ node }}"
+wsrep_sst_donor="172.10.10.203,"
+wsrep_cluster_name="galera_cluster"
+
+#Mandatory settings to enable Galera
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+gtid_domain_id=0404
+default-storage-engine=innoDB
+innodb_autoinc_lock_mode=2
+innodb_doublewrite=1
+query_cache_size=0
+query_cache_type=OFF
+bind-address=0.0.0.0
+binlog_format=ROW
+
+#Galera synchronisation configuration
+wsrep_sst_method=mariabackup
+wsrep_provider_options="evs.suspect_timeout=PT5S"
+wsrep_provider_options="evs.send_window=4"
+wsrep_provider_options="evs.user_send_window=2"
+wsrep_provider_options="evs.inactive_check_period=PT1S"
+wsrep_provider_options="gcache.dir=/var/lib/mysql;gcache.name=galera.cache;gcache.size=128M;gcs.fc_limit=128;gcs.fc_factor=0.8;gcache.recover=yes;evs.suspect_timeout=PT5S;evs.send_window=4;evs.user_send_window=2;evs.inactive_check_period=PT1S"
+
+[sst]
+inno-backup-opts="--parallel=1"
+inno-apply-opts="--use-memory=128M"
