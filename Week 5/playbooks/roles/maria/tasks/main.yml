@@ -1,0 +1,41 @@
+---
+#install mariadb on all nodes
+
+- name: updating package lists
+  apt:
+    update_cache: yes
+    cache_valid_time: 2400
+
+- name: initial setup
+  apt:
+    name:
+      - software-properties-common
+      - python3-pymysql
+      - mariadb-backup
+    state: present
+    update_cache: yes
+    cache_valid_time: 2400
+
+- name: import keys
+  apt_key: 
+    url: https://mariadb.org/mariadb_release_signing_key.asc
+    state: present
+
+- name: add repo
+  apt_repository:
+    filename: mariadb-10.5
+    repo: deb [arch=amd64] http://mariadb.mirror.globo.tech/repo/10.5/ubuntu focal main
+    state: present
+
+- name: install mariadb
+  apt:
+    name:
+      - mariadb-server
+      - mariadb-client
+    state: latest
+
+- name: ensure mariadb servers are up
+  service:
+    name: mariadb
+    enabled: true
+    state: started

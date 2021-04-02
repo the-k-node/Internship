@@ -1,0 +1,8 @@
+---
+- name: Installing and Configuring Mariadb
+  hosts: nodes
+  become: true
+  become_method: sudo
+  serial: 1
+  roles:
+    - maria
