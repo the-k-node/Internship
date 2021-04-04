@@ -17,5 +17,5 @@
   when: ansible_enp0s8.ipv4.address == groups['nodes'][0]
 
 #start the servers on all nodes
-- name: Restart the other MariaDB Galera cluster nodes
+- name: start the other MariaDB Galera cluster nodes
   service: name=mariadb state=started

@@ -1,0 +1,29 @@
+---
+- name: Status of data replication
+  command: mysql -u root -e "SHOW STATUS LIKE 'wsrep_local_state_comment'"
+  register: status
+
+- set_fact:
+    stat: "{{ status.stdout.split('\t') }}"
+  when: status.stdout is defined
+
+- name: stop mariadb servers on nodes which are in sync
+  service: name=mariadb state=stopped
+  when: 
+    - stat.2 is defined
+    - stat.2 == 'Synced'
+
+- name: Switch off wsrep to remove nodes from cluster
+  replace:
+    path: /etc/mysql/conf.d/galera.cnf
+    regexp: 'wsrep_on=ON'
+    replace: 'wsrep_on=OFF'
+  when: 
+    - stat.2 is defined
+    - stat.2 == 'Synced'
+
+- name: start mariadb servers on nodes
+  service: name=mariadb state=started
+  when: 
+    - stat.2 is defined
+    - stat.2 == 'Synced'
