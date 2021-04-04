@@ -28,6 +28,10 @@ query_cache_type                = OFF
 log_warnings            = 2
 server-id               = {{ server_id }}
 report_host             = {{ ans_host_add }}
+
+log_bin=/var/lib/mysql/mysql-bin.log
+log_slave_updates=ON
+
 innodb_print_all_deadlocks=1
 default_storage_engine  = InnoDB
 innodb_file_per_table   = 1
