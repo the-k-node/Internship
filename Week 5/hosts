@@ -1,7 +1,7 @@
 [nodes]
-172.10.10.201   server-id=1    ans_host_add=172.10.10.201
-172.10.10.202   server-id=2    ans_host_add=172.10.10.202
-172.10.10.203   server-id=3    ans_host_add=172.10.10.203
+172.10.10.201   server_id=1    ans_host_add=172.10.10.201
+172.10.10.202   server_id=2    ans_host_add=172.10.10.202
+172.10.10.203   server_id=3    ans_host_add=172.10.10.203
 
 [node_1]
 172.10.10.201
