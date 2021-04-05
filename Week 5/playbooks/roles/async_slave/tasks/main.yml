@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure replication user exists on master else create it
   mysql_user:
     name: "kmaster"
@@ -12,7 +11,7 @@
 
 #get gtid_binlog_pos value from master as gtid[1]
 - name: Get the gtid of gtid_binlog_pos
-  command: /usr/bin/mysql -u root -Ns -e "show global variables like 'gtid_binlog_pos'"
+  command: /usr/bin/mysql -u root -e "show global variables like 'gtid_binlog_pos'"
   register: gtid_str
   when: ansible_enp0s8.ipv4.address == groups['master_node'][0]
 - debug: var=gtid_str.stdout
@@ -25,9 +24,20 @@
   command: /usr/bin/mysql -u root -e "STOP SLAVE"
   when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
 
+- name: get global gtid_slave_pos value
+  command: /usr/bin/mysql -u root -e "show global variables like 'gtid_slave_pos'"
+  register: slave_stat
+  when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
+
+- set_fact:
+    s_pos: "{{ slave_stat.stdout.split('\t') }}"
+  when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
+
 - name: declare the slave_pos global variable
   command: /usr/bin/mysql -u root -e "SET GLOBAL gtid_slave_pos = '{{ hostvars['172.10.10.202']['gtid'][1] }}'"
-  when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
+  when: 
+    - ansible_enp0s8.ipv4.address == groups['slave_node'][0]
+    - s_pos.2 is not defined
 
 - name: configuring replication in slave using shell command
   command: /usr/bin/mysql -u root -e "CHANGE MASTER TO MASTER_HOST='172.10.10.202', MASTER_USER='kmaster', MASTER_PASSWORD='kiran', MASTER_USE_GTID=slave_pos";
