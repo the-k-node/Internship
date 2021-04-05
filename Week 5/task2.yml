@@ -1,0 +1,7 @@
+---
+- import_playbook: t2.1.mariadb.yml
+- import_playbook: t2.1.galera.yml
+- import_playbook: t2.1.myconf.yml
+- import_playbook: t2.2.demote.node3.yml
+- import_playbook: t2.3.cluster.destroy.yml
+- import_playbook: t2.5.users.yml
