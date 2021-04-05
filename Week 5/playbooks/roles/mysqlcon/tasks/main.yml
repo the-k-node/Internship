@@ -1,6 +1,6 @@
 ---
 #copy my.cnf file to all nodes
-- name: copy galera config
+- name: copy maria config
   template:
       src: my.cnf.j2
       dest: /etc/mysql/my.cnf
