@@ -6,6 +6,19 @@
       dest: /etc/mysql/conf.d/galera.cnf
       owner: root
       mode: 0644
+      force: no
+
+- name: Check for galera idempotency
+  command: /usr/bin/mysql -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size'"
+  register: gal_stat_str
+  when: ansible_enp0s8.ipv4.address == groups['node_1'][0]
+
+- set_fact:
+    galera_stat: "{{ gal_stat_str.stdout.split('\t').2 }}"
+  when: ansible_enp0s8.ipv4.address == groups['node_1'][0]
+
+# - debug: var=galera_stat
+#   when: ansible_enp0s8.ipv4.address == groups['node_1'][0]
 
 #stop server on all nodes
 - name: Stop MariaDB on first MariaDB Galera cluster node
@@ -14,7 +27,9 @@
 #bootstrap cluster from node1
 - name: Bootstrap first MariaDB Galera cluster node
   command: galera_new_cluster
-  when: ansible_enp0s8.ipv4.address == groups['nodes'][0]
+  when: 
+    - ansible_enp0s8.ipv4.address == groups['nodes'][0]
+    - galera_stat == '0'
 
 #start the servers on all nodes
 - name: start the other MariaDB Galera cluster nodes
