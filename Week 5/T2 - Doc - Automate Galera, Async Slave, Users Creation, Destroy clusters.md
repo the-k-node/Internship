@@ -56,7 +56,8 @@ $ ansible-galaxy init /etc/ansible/roles/<role-name>
 * Playbook File : [t2.3.cluster.destroy.yml](https://github.com/alwaysiamkk/Internship/blob/main/Week%205/playbooks/t2.3.cluster.destroy.yml)
 
 * Steps followed are
-    1. Check the replication status in nodes 1 and 2 using ```sql
+    1. Check the replication status in nodes 1 and 2 using 
+    ```sql
     SHOW STATUS LIKE 'wsrep_local_state_comment';
     ```
     if that returns `Synced`, then we can perform cluster destruction or wait for replication to sync up in all nodes.
