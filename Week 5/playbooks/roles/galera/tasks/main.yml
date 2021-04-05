@@ -1,8 +1,12 @@
 ---
+# #check whether config already exists
+# - stat: path=/etc/mysql/conf.d/galera.cnf
+#   register: st
+
 #copy cluster.cnf file to all nodes
 - name: copy galera config
   template:
-      src: galera.cnf.j2
+      src: cluster.cnf.j2
       dest: /etc/mysql/conf.d/galera.cnf
       owner: root
       mode: 0644

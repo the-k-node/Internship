@@ -1,6 +1,5 @@
 ---
 #install mariadb on all nodes
-
 - name: updating package lists
   apt:
     update_cache: yes

@@ -9,7 +9,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   when: ansible_enp0s8.ipv4.address == groups['master_node'][0]
 
-#get gtid_binlog_pos value from master as gtid[1]
+#get gtid_binlog_pos value from master as gtid[2]
 - name: Get the gtid of gtid_binlog_pos
   command: /usr/bin/mysql -u root -e "show global variables like 'gtid_binlog_pos'"
   register: gtid_str
@@ -52,11 +52,19 @@
   service: name=mariadb state=stopped
   when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
 
-- name: Remove galera.cnf in slave-node
-  ansible.builtin.file:
+# - name: Remove galera.cnf in slave-node
+#   ansible.builtin.file:
+#     path: /etc/mysql/conf.d/galera.cnf
+#     state: absent
+#   when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
+
+- name: Switch off wsrep on slave node
+  replace:
     path: /etc/mysql/conf.d/galera.cnf
-    state: absent
-  when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
+    regexp: 'wsrep_on=ON'
+    replace: 'wsrep_on=OFF'
+  when: 
+    - ansible_enp0s8.ipv4.address == groups['slave_node'][0]
 
 #start the servers on slave node
 - name: Start MariaDB on slave node

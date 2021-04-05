@@ -1,4 +1,8 @@
 ---
+#check whether config already exists
+- stat: path=/etc/mysql/conf.d/galera.cnf
+  register: st
+
 #copy my.cnf file to all nodes
 - name: copy maria config
   template:
@@ -6,4 +10,4 @@
       dest: /etc/mysql/my.cnf
       owner: root
       mode: 0644
-      force: no
+  when: not st.stat.exists

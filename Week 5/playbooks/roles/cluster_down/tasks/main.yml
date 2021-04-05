@@ -2,6 +2,7 @@
 - name: Status of data replication
   command: mysql -u root -e "SHOW STATUS LIKE 'wsrep_local_state_comment'"
   register: status
+  when: ansible_enp0s8.ipv4.address != groups['slave_node'][0]
 
 - set_fact:
     stat: "{{ status.stdout.split('\t') }}"
@@ -21,6 +22,7 @@
   when: 
     - stat.2 is defined
     - stat.2 == 'Synced'
+    - ansible_enp0s8.ipv4.address != groups['slave_node'][0]
 
 - name: start mariadb servers on nodes
   service: name=mariadb state=started
