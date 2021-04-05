@@ -14,12 +14,12 @@
   command: /usr/bin/mysql -u root -e "show global variables like 'gtid_binlog_pos'"
   register: gtid_str
   when: ansible_enp0s8.ipv4.address == groups['master_node'][0]
-- debug: var=gtid_str.stdout
-  when: ansible_enp0s8.ipv4.address == groups['master_node'][0]
+# - debug: var=gtid_str.stdout
+#   when: ansible_enp0s8.ipv4.address == groups['master_node'][0]
 - set_fact:
     gtid: "{{ gtid_str.stdout.split('\t') }}"
   when: ansible_enp0s8.ipv4.address == groups['master_node'][0]
-- debug: var=hostvars['172.10.10.202']['gtid'][1]
+# - debug: var=hostvars['172.10.10.202']['gtid'][1]
 - name: stop slave on slave node
   command: /usr/bin/mysql -u root -e "STOP SLAVE"
   when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
@@ -34,7 +34,7 @@
   when: ansible_enp0s8.ipv4.address == groups['slave_node'][0]
 
 - name: declare the slave_pos global variable
-  command: /usr/bin/mysql -u root -e "SET GLOBAL gtid_slave_pos = '{{ hostvars['172.10.10.202']['gtid'][1] }}'"
+  command: /usr/bin/mysql -u root -e "SET GLOBAL gtid_slave_pos = '{{ hostvars['172.10.10.202']['gtid'][2] }}'"
   when: 
     - ansible_enp0s8.ipv4.address == groups['slave_node'][0]
     - s_pos.2 is not defined
