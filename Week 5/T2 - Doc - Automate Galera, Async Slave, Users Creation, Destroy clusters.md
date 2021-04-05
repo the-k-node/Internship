@@ -1,4 +1,4 @@
-## Task2 - Galera Cluster Setup using Ansible
+## Task2 - Cluster, Slave replication setup using Ansible
 
 * Run
 ```bash
