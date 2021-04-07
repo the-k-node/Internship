@@ -8,3 +8,4 @@ Phonepe - SRE - Internship
 * [Week 3](https://github.com/alwaysiamkk/Internship/tree/main/Week%203)
 * [Week 4](https://github.com/alwaysiamkk/Internship/tree/main/Week%204)
 * [Week 5](https://github.com/alwaysiamkk/Internship/tree/main/Week%205)
+* [Week 6](https://github.com/alwaysiamkk/Internship/tree/main/Week%206)
