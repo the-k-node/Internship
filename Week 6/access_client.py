@@ -17,7 +17,7 @@ try:
       'product': 'Laptop',
       'cost': 80000,
   }
-  client.put(key, bins)
+  client.put(key, bins, meta={'ttl':60})
     
 except Exception as e:
   print("DB Write Error: {0} [{1}]".format(e.msg, e.code))

@@ -22,10 +22,10 @@ try:
   }
   for i in range(1,3001):
       key = ('orders', 'buyers', i)
-      client.put(key, buyer_bins, meta={'ttl':86400})
+      client.remove(key, buyer_bins, meta={'ttl':86400})
   for j in range(1,3001):
       key = ('orders', 'products', j)
-      client.put(key, prod_bins, meta={'ttl':86400})
+      client.remove(key, prod_bins, meta={'ttl':86400})
     
 except Exception as e:
   print("DB Write Error: {0} [{1}]".format(e.msg, e.code))
