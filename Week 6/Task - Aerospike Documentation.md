@@ -205,7 +205,7 @@ node name | IP address
         
         * Now verify the installation by importing `aerospike` into a python program and you shouldn't get any errors for that.
 
-        * The program to read and write some data is [access_client.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/access_client.py], which has `key` data which has (`namespace`,`set`,`Primary Key(PK)`). If this program returns any exception, check for the connection node address of one node of a cluster in `hosts` object, and if a write exception, then create a new set in that namespace using `aql` client console.
+        * The program to read and write some data is [access_client.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/access_client.py), which has `key` data which has (`namespace`,`set`,`Primary Key(PK)`). If this program returns any exception, check for the connection node address of one node of a cluster in `hosts` object, and if a write exception, then create a new set in that namespace using `aql` client console.
 
             ```aql
             > insert into orders.products(PK,product,cost) values(1,'mouse',200)
