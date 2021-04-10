@@ -205,7 +205,7 @@ node name | IP address
         
         * Now verify the installation by importing `aerospike` into a python program and you shouldn't get any errors for that.
 
-        * The program to read and write some data is (access_client.py)[https://github.com/alwaysiamkk/Internship/blob/main/Week%206/access_client.py], which has `key` data which has (`namespace`,`set`,`Primary Key(PK)`). If this program returns any exception, check for the connection node address of one node of a cluster in `hosts` object, and if a write exception, then create a new set in that namespace using `aql` client console.
+        * The program to read and write some data is [access_client.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/access_client.py], which has `key` data which has (`namespace`,`set`,`Primary Key(PK)`). If this program returns any exception, check for the connection node address of one node of a cluster in `hosts` object, and if a write exception, then create a new set in that namespace using `aql` client console.
 
             ```aql
             > insert into orders.products(PK,product,cost) values(1,'mouse',200)
@@ -237,7 +237,7 @@ node name | IP address
 
 8. Each set should have 3000 records.
 
-    * Client Python program (add_3k_rec.py)[https://github.com/alwaysiamkk/Internship/blob/main/Week%206/add_3k_rec.py], I just run a for loop of range 30001 with same records which adds 3000 records with iterative variable as my `PK`.
+    * Client Python program [add_3k_rec.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/add_3k_rec.py), I just run a for loop of range 30001 with same records which adds 3000 records with iterative variable as my `PK`.
 
 9. The records should have an expiry of 24h
 
@@ -287,7 +287,7 @@ node name | IP address
 
 11. Bring back the node,start inserting 1000 records in the AS cluster while the data migration is going on.
 
-    * Created a separate program (add_1k_rec.py)[https://github.com/alwaysiamkk/Internship/blob/main/Week%206/add_1k_rec.py], to add 1000 records as did for 3000 records before.
+    * Created a separate program [add_1k_rec.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/add_1k_rec.py), to add 1000 records as did for 3000 records before.
 
     * Start the `aerospike` on `aero-node-3`, this starts the migration and run the program above in the `python2.7` shell, then check the migration status by running
     x
