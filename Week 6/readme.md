@@ -5,6 +5,7 @@ Topic : Aerospike, Rabbit MQ, and Elasticsearch
 ```
 
 * Aerospike:
+
     * Install and configure 1 node Aerospike cluster version 4.8.0.6
     * The AS cluster should have a username/password
     * Data should be persisted on disk
