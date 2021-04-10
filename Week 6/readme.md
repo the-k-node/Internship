@@ -18,3 +18,4 @@ Topic : Aerospike, Rabbit MQ, and Elasticsearch
     * Shut down one of the nodes, optimise the AS cluster such that the data migration is faster
     * Bring back the node,start inserting 1000 records in the AS cluster while the data migration is going on.
     * Observe the ops/sec, read/write latencies and migration speed.
+    * Upgrade AS to version 4.9 without loosing the data.
