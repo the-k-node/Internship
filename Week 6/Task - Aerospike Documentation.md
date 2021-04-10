@@ -2,11 +2,11 @@
 
 > VM  Configuration
     
-    node name | IP address
-    :--: | :--:
-    `aero-node-1` | 192.168.100.88
-    `aero-node-2` | 192.168.100.85
-    `aero-node-3` | 192.168.100.86
+node name | IP address
+:--: | :--:
+`aero-node-1` | 192.168.100.88
+`aero-node-2` | 192.168.100.85
+`aero-node-3` | 192.168.100.86
 
 1. Install and configure 1 node Aerospike cluster version 4.8.0.6
 
@@ -46,9 +46,8 @@
             ...
         }
         ```
-
-    and again back to bash
-
+        and again back to bash,
+        
         ```bash
         $ asadm           #to access server admin shell
         > manage acl create role superuser priv read-write-udf  #create a new role 'superuser' with read, write privileges
@@ -71,7 +70,7 @@
         }
         ```
 
-    create required files and own to the user defined above
+        create required files and own to the user defined above.
 
         ```bash
         $ sudo mkdir /var/log/aerospike        #for log file defined in conf file
@@ -153,7 +152,7 @@
         ```bash
         $ journalctl -u aerospike -a -o cat -f | grep 'CLUSTER-SIZE'
         ```
-    the cluster size will be `3` if configured properly
+        the cluster size will be `3` if configured properly
 
 5. Create a namespace Orders
 
@@ -170,14 +169,14 @@
         }
         ```
 
-    and also the required files and permissions
+        and also the required files and permissions
 
         ```bash
         $ sudo touch /opt/aerospike/data/orders.dat
         $ sudo chown kiran /opt/aerospike/data/orders.dat
         ```
     
-    restart for applying changes
+        restart for applying changes
 
 6. Write a program using an AS client to write and read the data from AS.
 
@@ -194,7 +193,7 @@
             $ pip2.7 -V
             ```
         
-        if got any error, try reinstalling the same version and if it displays version details, then proceed.
+            if got any error, try reinstalling the same version and if it displays version details, then proceed.
 
         * Install `aerospike` client
 
@@ -213,14 +212,15 @@
             > delete from orders.products where PK=1
             ```
         
-        this inserts the record by creating the set and will be stored in metadata even if we remove the only record in the set.
+            this inserts the record by creating the set and will be stored in metadata even if we remove the only record in the set.
 
         * Run the program in supported python console
+        
             ```bash
             $ python2.7
             >>> <copy-paste the whole program>
             ```
-        if this returns some code like `0L`, then it worked fine and you'll get the read ouput as well, else will get an exception.
+            if this returns some code like `0L`, then it worked fine and you'll get the read ouput as well, else will get an exception.
 
 7. The namespace should have the following sets (buyer details, product details)
 
@@ -233,7 +233,7 @@
         > delete from orders.products where PK=1
         ```
 
-    now, we can add any number of records and won't get any write exceptions.
+        now, we can add any number of records and won't get any write exceptions.
 
 8. Each set should have 3000 records.
 
@@ -320,7 +320,7 @@
         }
         ```
 
-    we have read, write, and ops benchmarks for monitoring these latencies using
+        we have read, write, and ops benchmarks for monitoring these latencies using
 
         ```bash
         $ cat /var/log/aerospike/aerospike.log | grep "{orders}-write"              #for writes
@@ -355,4 +355,4 @@
         > select * from orders.products
         > select * from orders.buyers
         ```
-    verify the count displayed at the last, should be same as before.
+        verify the count displayed at the last, should be same as before.
