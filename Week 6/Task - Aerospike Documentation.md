@@ -298,9 +298,19 @@ node name | IP address
 12. Observe the ops/sec, read/write latencies and migration speed.
 
     * We can use `latency` command in `asinfo` to get the latencies like `ops/sec`, `read/write`,
+
         ```bash
         $ asinfo -v latency: -l
-        ``` 
+        ```
+    
+    * For detailed latencies,
+
+        ```bash
+        $ asloglatency -h {orders}-write    #for write latencies
+        $ asloglatency -h {orders}-read    #for read latencies
+        ```
+
+        , use `Ctrl+C` for final results of `avg` & `max` values of `ops/sec` for `read` & `write`.
 
     * We can check the statestics of the migrations in admin console using `asadm` command,
 
