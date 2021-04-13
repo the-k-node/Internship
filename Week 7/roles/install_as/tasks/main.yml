@@ -4,9 +4,6 @@
 - name: Extract Aerospike
   command: tar -xvf aerospike.tgz
 
-#- name: cd into aerospike
-#  command: cd aerospike-server-community-4.8.0.6-ubuntu18.04/
-
 - name: Try installing Aerospike
   command: chdir=/home/kiran/aerospike-server-community-4.8.0.6-ubuntu18.04  ./asinstall
   ignore_errors: true
