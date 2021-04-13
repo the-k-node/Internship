@@ -1,0 +1,4 @@
+[nodes]
+192.168.10.98   server_id=1    host_add=192.168.10.98
+192.168.10.99   server_id=2    host_add=192.168.10.99
+192.168.10.100  server_id=3    host_add=192.168.10.100

@@ -1,0 +1,18 @@
+- name: Download Aerospike 4.8.0.6
+  command: wget -O aerospike.tgz 'https://www.aerospike.com/download/server/4.8.0.6/artifact/ubuntu18'
+
+- name: Extract Aerospike
+  command: tar -xvf aerospike.tgz
+
+#- name: cd into aerospike
+#  command: cd aerospike-server-community-4.8.0.6-ubuntu18.04/
+
+- name: Try installing Aerospike
+  command: chdir=/home/kiran/aerospike-server-community-4.8.0.6-ubuntu18.04  ./asinstall
+  ignore_errors: true
+
+- name: Fix broken packages
+  command: apt --fix-broken install -y
+
+- name: Resume Installation Aerospike
+  command: chdir=/home/kiran/aerospike-server-community-4.8.0.6-ubuntu18.04 ./asinstall

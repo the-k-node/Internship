@@ -1,0 +1,10 @@
+---
+- name: Aerospike Automation
+  remote_user: kiran
+  hosts: nodes
+  become: true
+  become_method: sudo
+  serial: 1
+  roles:
+    - install_as
+    - cluster_as

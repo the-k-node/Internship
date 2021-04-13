@@ -1,0 +1,2 @@
+---
+- import_playbook: ins_clus_as.yml

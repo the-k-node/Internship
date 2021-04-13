@@ -1,0 +1,15 @@
+---
+- name: start all aerospike daemons
+  service: name=aerospike state=started
+
+- name: check cluster
+  shell: journalctl -u aerospike -a -o cat | grep 'CLUSTER-SIZE'
+  register: cluster_op
+
+# - debug: var=cluster_op.stdout_lines[-1]
+
+- set_fact:
+    size: "{{ cluster_op.stdout_lines[-1].split(' ')[-1] }}"
+
+- debug:
+    msg: "{% if size == '3' %} Cluster is configured successfully for '{{ size }}' nodes! {% else %} Cluster is configured for '{{ size }}' nodes only! {% endif %}"
