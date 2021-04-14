@@ -1,4 +1,4 @@
-### Aerospike Tasks
+### Ansible Aerospike Tasks
 
 > VM  Configuration
 
@@ -9,7 +9,7 @@ node name | IP address
 `m-node-2` | 192.168.100.99
 `m-node-3` | 192.168.100.100
 
-`All tasks plybook : [tasks.yml](https://github.com/alwaysiamkk/Internship/blob/main/Week%207/tasks.yml)`
+`All tasks plybook` : [tasks.yml](https://github.com/alwaysiamkk/Internship/blob/main/Week%207/tasks.yml)
 
 * Install and configure 3 node Aerospike cluster version 4.8.0.6.
 
