@@ -1,0 +1,9 @@
+---
+- name: Data Persistence on disk
+  remote_user: kiran
+  hosts: nodes[0]
+  become: true
+  become_method: sudo
+  serial: 1
+  roles:
+    - orders_data_pers

@@ -1,0 +1,23 @@
+---
+- name: Data Persistence
+  replace:
+    path: /etc/aerospike/aerospike.conf
+    regexp: 'storage-engine memory'
+    replace: 'storage-engine device {\n\tfile /opt/aerospike/data/test.dat\nfilesize 16G\ndata-in-memory true\n}'
+
+- name: Change 'bar' ns to 'orders' ns
+  lineinfile:
+    path: /etc/aerospike/aerospike.conf
+    regexp: 'namespace bar {'
+    line: 'namespace orders {'
+
+- name: Data persistence for 'orders' ns
+  replace:
+    path: /etc/aerospike/aerospike.conf
+    regexp: 'file /opt/aerospike/data/test.dat'
+    replace: 'file /opt/aerospike/data/orders.dat'
+    after: 'namespace orders {'
+    before: 'filesize 16G'
+
+- name: Restart aerospike daemons to apply changes
+  service: name=aerospike state=started
