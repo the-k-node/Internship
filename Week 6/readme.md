@@ -1,7 +1,7 @@
 ># Tasks - Week 6
 
 ```
-Topic : Aerospike, Rabbit MQ, and Elasticsearch
+Topic : DataStores - Aerospike or Rabbit MQ or Elasticsearch
 ```
 
 * Aerospike:
