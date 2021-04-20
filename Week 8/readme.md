@@ -1,7 +1,7 @@
 ># Tasks - Week 8
 
 ```
-Topic : Monitoring Data Store setup (Aerospike)
+Topic : Monitoring Data Store setup - Aerospike
 ```
 
 1. Setup collectd to monitor various metrics for operating system and one of the following datastores ES/RMQ/AS.
