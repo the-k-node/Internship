@@ -5,7 +5,7 @@ Topic : Monitoring Data Store - Aerospike
 ```
 
 1. Setup collectd to monitor various metrics for operating system and one of the following datastores ES/RMQ/AS.
-2. Setup influxdb on a vm.
+2. Setup influxdb on a vm. 
 3. Send collectd metrics to influxdb.
 4. Plot these metrics on a grafana dashboards.
 5. Setup riemann on a vm.
