@@ -1,0 +1,11 @@
+INFO [2021-04-24 14:06:21,974] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /boot, :state expired, :time 404818295491/250, :ttl 60}
+INFO [2021-04-24 14:06:21,982] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /, :state expired, :time 1619273181981/1000, :ttl 60}
+INFO [2021-04-24 14:06:21,990] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/core18/1997, :state expired, :time 161927318199/100, :ttl 60}
+INFO [2021-04-24 14:06:21,995] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/lxd/19188, :state expired, :time 323854636399/200, :ttl 60}
+INFO [2021-04-24 14:06:21,998] riemann task 2 - riemann.config - expired {:host aero-node-1, :service memory, :state expired, :time 809636590999/500, :ttl 60}
+INFO [2021-04-24 14:06:21,999] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/snapd/10707, :state expired, :time 1619273181999/1000, :ttl 60}
+INFO [2021-04-24 14:06:22,000] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/core18/1944, :state expired, :time 1619273182, :ttl 60}
+INFO [2021-04-24 14:06:22,002] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/lxd/19647, :state expired, :time 1619273182001/1000, :ttl 60}
+INFO [2021-04-24 14:06:22,002] riemann task 2 - riemann.config - expired {:host aero-node-1, :service load, :state expired, :time 809636591001/500, :ttl 60}
+INFO [2021-04-24 14:06:22,003] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/snapd/11588, :state expired, :time 1619273182003/1000, :ttl 60}
+INFO [2021-04-24 14:06:22,003] riemann task 2 - riemann.config - expired {:host aero-node-1, :service cpu, :state expired, :time 1619273182003/1000, :ttl 60}
