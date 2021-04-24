@@ -1,12 +1,15 @@
 import psutil
 import os, popen2, sys
 from time import sleep
+import subprocess
 sys.path.append("..")
 
 from riemann_client.transport import TCPTransport
 from riemann_client.client import QueuedClient
 
 event_queue = []
+stats_op = subprocess.check_output(["asinfo","-v","'statistics'"])
+orders_stats = subprocess.check_output(["asinfo","-v","'namespace/orders'"])
 
 # helper methods
 def cpu_report():
@@ -20,8 +23,8 @@ def memory_report():
     r, w, e = popen2.popen3('ps -eo pmem,pid,args | sort -nrb -k1 | head -10')
     return r.readlines()
 
-# main functions
-def cpu(warning=0.6, critical=0.8):
+# main os functions
+def cpu(warning, critical):
     c = psutil.cpu_times(percpu=False)
     used = c.user + c.system + c.nice
     total = used + c.idle
@@ -31,7 +34,7 @@ def cpu(warning=0.6, critical=0.8):
     if f > critical: state="critical"
     event_queue.append(("cpu", state, f, "%.2f %% user+nice+sytem\n\n%s" % (f * 100, cpu_report())))
 
-def load(warning=3, critical=8):
+def load(warning, critical):
     l = os.getloadavg()
     f = l[2]/cores()
     state = "ok"
@@ -39,7 +42,7 @@ def load(warning=3, critical=8):
     if f > warning: state="warning"
     event_queue.append(("load", state, l[2], "15-minute load average/core is %f" % l[2]))
 
-def memory(warning = 0.6, critical=0.8):
+def memory(warning, critical):
     m = psutil.virtual_memory()
     state = "ok"
     f = m.percent / 100.0
@@ -47,7 +50,7 @@ def memory(warning = 0.6, critical=0.8):
     if f > critical: state = "critical"
     event_queue.append(("memory", state, f, "%.2f%% used\n\n%s" % (f * 100, memory_report())))
 
-def disk(warning=0.6, critical=0.8):
+def disk(warning, critical):
     for p in psutil.disk_partitions():
         u = psutil.disk_usage(p.mountpoint)
         perc = u.percent
@@ -57,11 +60,42 @@ def disk(warning=0.6, critical=0.8):
         if f > critical: state="critical"
         event_queue.append(("disk %s" % p.mountpoint, state, f, "%s used" % perc))
 
+#as methods
+def as_cluster_size(warning, critical):
+    cluster_size = stats_op[13]
+    cluster_size = int(cluster_size)
+    state = "ok"
+    if cluster_size > warning: state="warning"
+    if cluster_size > critical: state="critical"
+    event_queue.append(("as_cluster_size", state, cluster_size, "aerospike cluster size are %f" % cluster_size))
+
+def as_client_connections(warning, critical):
+    client_conns = stats_op[stats_op.find('client_connections')+19]
+    client_conns = int(client_conns)
+    state = "ok"
+    if client_conns > warning: state="warning"
+    if client_conns > critical: state="critical"
+    event_queue.append(("as_client_connections", state, client_conns, "aerospike client connections are %f" % client_conns))
+
+def as_hwm_breach(warning):
+    hwm = orders_stats[orders_stats.find('high-water-memory-pct')+22]+orders_stats[orders_stats.find('high-water-memory-pct')+23]
+    mem_free = orders_stats[orders_stats.find('memory_free_pct')+16]+orders_stats[ orders_stats.find('memory_free_pct')+17]
+    hwm = int(hwm)
+    mem_free = int(mem_free)
+    state = "ok"
+    if mem_free < warning: state="warning"
+    if mem_free < 100-hwm: state="critical"
+    event_queue.append(("as_hwm_breach", state, mem_free, "aerospike hwm is %f and memory free is %f" % (hwm, mem_free)))
+
+
 def run():
-    cpu()
-    load()
-    memory()
-    disk()
+    cpu(0.6,0.8)
+    load(3,8)
+    memory(0.6,0.8)
+    disk(0.6,0.8)
+    as_cluster_size(2,1)
+    as_client_connections(2,1)
+    as_hwm_breach(40)
     send_data()
 
 def send_data():
