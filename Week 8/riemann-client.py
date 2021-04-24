@@ -2,7 +2,6 @@ import psutil
 import os, popen2, sys
 from time import sleep
 import subprocess
-sys.path.append("..")
 
 from riemann_client.transport import TCPTransport
 from riemann_client.client import QueuedClient
