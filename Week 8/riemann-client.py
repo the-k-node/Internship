@@ -32,7 +32,12 @@ def cpu(warning, critical):
     state = "ok"
     if f > warning: state="warning"
     if f > critical: state="critical"
-    event_queue.append(("cpu", state, f, "%.2f %% user+nice+sytem\n\n%s" % (f * 100, cpu_report())))
+    event_queue.append((
+        "cpu", 
+        state, 
+        f, 
+        "%.2f %% user+nice+sytem\n\n%s" % (f * 100, cpu_report())
+    ))
 
 def load(warning, critical):
     l = os.getloadavg()
@@ -40,7 +45,12 @@ def load(warning, critical):
     state = "ok"
     if f > critical: state="critical"
     if f > warning: state="warning"
-    event_queue.append(("load", state, l[2], "15-minute load average/core is %f" % l[2]))
+    event_queue.append((
+        "load", 
+        state, 
+        l[2], 
+        "15-minute load average/core is %f" % l[2]
+    ))
 
 def memory(warning, critical):
     m = psutil.virtual_memory()
@@ -48,7 +58,12 @@ def memory(warning, critical):
     f = m.percent / 100.0
     if f > warning: state = "warning"
     if f > critical: state = "critical"
-    event_queue.append(("memory", state, f, "%.2f%% used\n\n%s" % (f * 100, memory_report())))
+    event_queue.append((
+        "memory", 
+        state, 
+        f, 
+        "%.2f%% used\n\n%s" % (f * 100, memory_report())
+    ))
 
 def disk(warning, critical):
     for p in psutil.disk_partitions():
@@ -58,16 +73,26 @@ def disk(warning, critical):
         state = "ok"
         if f > warning: state="warning"
         if f > critical: state="critical"
-        event_queue.append(("disk %s" % p.mountpoint, state, f, "%s used" % perc))
+        event_queue.append((
+            "disk %s" % p.mountpoint, 
+            state, 
+            f, 
+            "%s used" % perc, 
+        ))
 
 #as methods
 def as_cluster_size(warning, critical):
     cluster_size = stats_op[13]
     cluster_size = int(cluster_size)
     state = "ok"
-    if cluster_size > warning: state="warning"
-    if cluster_size > critical: state="critical"
-    event_queue.append(("as_cluster_size", state, cluster_size, "aerospike cluster size are %f" % cluster_size))
+    if cluster_size <= warning: state="warning"
+    if cluster_size <= critical: state="critical"
+    event_queue.append((
+        "as_cluster_size", 
+        state, 
+        cluster_size, 
+        "aerospike cluster size are %f" % cluster_size
+    ))
 
 def as_client_connections(warning, critical):
     client_conns = stats_op[stats_op.find('client_connections')+19]
@@ -75,7 +100,12 @@ def as_client_connections(warning, critical):
     state = "ok"
     if client_conns > warning: state="warning"
     if client_conns > critical: state="critical"
-    event_queue.append(("as_client_connections", state, client_conns, "aerospike client connections are %f" % client_conns))
+    event_queue.append((
+        "as_client_connections", 
+        state, 
+        client_conns, 
+        "aerospike client connections are %f" % client_conns 
+    ))
 
 def as_hwm_breach(warning):
     hwm = orders_stats[orders_stats.find('high-water-memory-pct')+22]+orders_stats[orders_stats.find('high-water-memory-pct')+23]
@@ -85,7 +115,12 @@ def as_hwm_breach(warning):
     state = "ok"
     if mem_free < warning: state="warning"
     if mem_free < 100-hwm: state="critical"
-    event_queue.append(("as_hwm_breach", state, mem_free, "aerospike hwm is %f and memory free is %f" % (hwm, mem_free)))
+    event_queue.append((
+        "as_hwm_breach", 
+        state, 
+        mem_free, 
+        "aerospike hwm is %f and memory free is %f" % (hwm, mem_free)
+    ))
 
 
 def run():
@@ -101,7 +136,12 @@ def run():
 def send_data():
     with QueuedClient(TCPTransport("192.168.100.126", 5555)) as client:
         for evt in event_queue:
-            client.event(service=evt[0], state=evt[1], metric_f=evt[2], description=evt[3])
+            client.event(
+                service=evt[0], 
+                state=evt[1], 
+                metric_f=evt[2], 
+                description=evt[3], 
+                ttl=3600)
         client.flush()
 
 if __name__ == "__main__":
