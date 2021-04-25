@@ -1,0 +1,29 @@
+* Install `collectd`:
+
+    ```bash
+    $ sudo apt-get update
+    $ sudo apt-get install collectd collectd-utils
+    ```
+
+    in case of any python related errors:
+    ```bash
+    $ sudo apt-get install python-setuptools
+    ```
+
+    check daemon status:    
+    ```bash
+    $ sudo service collectd status
+    ```
+
+* Configure `collectd` to collect OS metrics
+    
+    in `/etc/collectd/collectd.conf` file, we add this [configuration](https://github.com/alwaysiamkk/Internship/blob/main/Week%208/collectd.conf)
+
+    & check for any errors in logs
+    ```bash
+    $ tail -f /var/log/syslog | grep "collectd"
+    or
+    $ tail -n 500 /var/log/syslog | grep "collectd"
+    ```
+
+* This configuration lets `collectd` collect specified metrics in `/etc/collectd/collectd.conf` file.
