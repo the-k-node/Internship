@@ -35,6 +35,6 @@
     ```
     > use collectd
     > show measurements
-    > select * from cpu_usage
+    > select * from cpu_value
     ```
-    `show measurements` shows all the metrics sent by `collectd`, and `cpu_usage` is one among them.
+    `show measurements` shows all the metrics sent by `collectd`, and `cpu_value` is one among them.
