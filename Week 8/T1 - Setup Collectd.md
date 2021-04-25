@@ -1,5 +1,6 @@
 * We have to do these following steps on all 3 nodes of `aerospike` datastore 
-    my vm configurations:
+    * my vm configurations:
+    
     host name | host address
     :--: | :--:
     aero-node-1 | 192.168.100.88
