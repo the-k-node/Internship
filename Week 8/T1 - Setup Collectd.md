@@ -6,6 +6,8 @@
     aero-node-1 | 192.168.100.88
     aero-node-2 | 192.168.100.133
     aero-node-3 | 192.168.100.86
+    influx-node | 192.168.100.129
+    riemann-node | 192.168.100.126
 
 * Install `collectd`:
 
