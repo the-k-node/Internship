@@ -1,3 +1,11 @@
+* We have to do these following steps on all 3 nodes of `aerospike` datastore 
+    my vm configurations:
+    host name | host address
+    :--: | :--:
+    aero-node-1 | 192.168.100.88
+    aero-node-2 | 192.168.100.133
+    aero-node-3 | 192.168.100.86
+
 * Install `collectd`:
 
     ```bash
