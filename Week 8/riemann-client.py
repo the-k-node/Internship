@@ -1,3 +1,11 @@
+'''
+Riemann client - Python Script using
+package by "borntyping"
+(https://github.com/borntyping/python-riemann-client)
+
+collects Operating System(using "psutil" package) & Aerospike data store metrics
+sends them to riemann server (IP: 192.168.100.126)
+'''
 import psutil
 import os, popen2, sys
 from time import sleep
@@ -35,7 +43,8 @@ def cpu(warning, critical):
         "cpu", 
         state, 
         f, 
-        "%.2f %% user+nice+sytem\n\n%s" % (f * 100, cpu_report())
+        "%.2f %% user+nice+sytem\n\n%s" % (f * 100, cpu_report()),
+        "1-cpu"
     ))
 
 def load(warning, critical):
@@ -48,7 +57,8 @@ def load(warning, critical):
         "load", 
         state, 
         l[2], 
-        "15-minute load average/core is %f" % l[2]
+        "15-minute load average/core is %f" % l[2],
+        "1-load"
     ))
 
 def memory(warning, critical):
@@ -61,7 +71,8 @@ def memory(warning, critical):
         "memory", 
         state, 
         f, 
-        "%.2f%% used\n\n%s" % (f * 100, memory_report())
+        "%.2f%% used\n\n%s" % (f * 100, memory_report()),
+        "1-memory"
     ))
 
 def disk(warning, critical):
@@ -76,7 +87,8 @@ def disk(warning, critical):
             "disk %s" % p.mountpoint, 
             state, 
             f, 
-            "%s used" % perc, 
+            "%s used" % perc,
+            "1-disc"
         ))
 
 #as methods
@@ -90,7 +102,8 @@ def as_cluster_size(warning, critical):
         "as_cluster_size", 
         state, 
         cluster_size, 
-        "aerospike cluster size are %f" % cluster_size
+        "aerospike cluster size are %f" % cluster_size,
+        "1-as-cluster"
     ))
 
 def as_client_connections(warning, critical):
@@ -103,7 +116,8 @@ def as_client_connections(warning, critical):
         "as_client_connections", 
         state, 
         client_conns, 
-        "aerospike client connections are %f" % client_conns 
+        "aerospike client connections are %f" % client_conns,
+        "1-as-connections" 
     ))
 
 def as_hwm_breach(warning):
@@ -115,14 +129,22 @@ def as_hwm_breach(warning):
     if mem_free < warning: state="warning"
     if mem_free < 100-hwm: state="critical"
     event_queue.append((
-        "as_hwm_breach", 
+        "as_hwm_perc", 
         state, 
-        mem_free, 
-        "aerospike hwm is %f and memory free is %f" % (hwm, mem_free)
+        hwm, 
+        "aerospike hwm is %f and memory free is %f" % (hwm, mem_free),
+        "1-as-hwm"
+    ))
+    event_queue.append((
+        "as_hwm_mem_perc", 
+        state, 
+        100-mem_free,
+        "aerospike hwm is %f and memory free is %f" % (hwm, mem_free),
+        "1-as-hwm-mem"
     ))
 
 
-def run():
+def collect_send():
     cpu(0.6,0.8)
     load(3,8)
     memory(0.6,0.8)
@@ -132,6 +154,11 @@ def run():
     as_hwm_breach(40)
     send_data()
 
+def run():
+    while True:
+        collect_send()
+        sleep(10)
+
 def send_data():
     with QueuedClient(TCPTransport("192.168.100.126", 5555)) as client:
         for evt in event_queue:
@@ -139,8 +166,9 @@ def send_data():
                 service=evt[0], 
                 state=evt[1], 
                 metric_f=evt[2], 
-                description=evt[3], 
-                ttl=3600)
+                description=evt[3],
+                tags=[evt[4]],
+                ttl=20)
         client.flush()
 
 if __name__ == "__main__":
