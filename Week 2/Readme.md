@@ -1,6 +1,8 @@
 ># Tasks - Week2
 
-Week 2 would concentrate around Bash/Perl/Python/Docker and learning how to parse data.
+```
+Topics : Bash, Perl, Python, Docker
+```
 
 The following is the task:
 
