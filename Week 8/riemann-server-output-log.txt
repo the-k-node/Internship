@@ -12,3 +12,11 @@ INFO [2021-04-24 16:54:27,448] riemann task 2 - riemann.config - expired {:host 
 INFO [2021-04-24 16:54:27,451] riemann task 2 - riemann.config - expired {:host aero-node-1, :service disk /snap/snapd/11588, :state expired, :time 1619283267451/1000, :ttl 60}
 INFO [2021-04-24 16:54:27,453] riemann task 2 - riemann.config - expired {:host aero-node-1, :service as_client_connections, :state expired, :time 1619283267453/1000, :ttl 60}
 INFO [2021-04-24 16:54:27,454] riemann task 2 - riemann.config - expired {:host aero-node-1, :service cpu, :state expired, :time 809641633727/500, :ttl 60}
+
+
+# collected at the final task, critical ones are mentioned below
+INFO [2021-04-25 20:42:04,148] defaultEventExecutorGroup-2-1 - riemann.config - critical #riemann.codec.Event{:host aero-node-1, :service disk /snap/lxd/19188, :state critical, :description 100.0 used, :metric 1.0, :tags [1-disc], :time 1.619383323991E9, :ttl 20.0}
+INFO [2021-04-25 20:42:04,160] defaultEventExecutorGroup-2-1 - riemann.config - critical #riemann.codec.Event{:host aero-node-1, :service disk /snap/core18/1997, :state critical, :description 100.0 used, :metric 1.0, :tags [1-disc], :time 1.619383323991E9, :ttl 20.0}
+INFO [2021-04-25 20:42:04,167] defaultEventExecutorGroup-2-1 - riemann.config - critical #riemann.codec.Event{:host aero-node-1, :service disk /snap/snapd/11588, :state critical, :description 100.0 used, :metric 1.0, :tags [1-disc], :time 1.619383323991E9, :ttl 20.0}
+INFO [2021-04-25 20:42:04,172] defaultEventExecutorGroup-2-1 - riemann.config - critical #riemann.codec.Event{:host aero-node-1, :service disk /snap/lxd/19647, :state critical, :description 100.0 used, :metric 1.0, :tags [1-disc], :time 1.619383323991E9, :ttl 20.0}
+INFO [2021-04-25 20:42:04,180] defaultEventExecutorGroup-2-1 - riemann.config - critical #riemann.codec.Event{:host aero-node-1, :service disk /snap/snapd/10707, :state critical, :description 100.0 used, :metric 1.0, :tags [1-disc], :time 1.619383323991E9, :ttl 20.0}
