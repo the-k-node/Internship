@@ -9,6 +9,6 @@
     $ pip install psutil
     ```
 
-* Final Script is - [riemann-client.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%208/riemann-client.py)
+* Final Script - [riemann-client.py](https://github.com/alwaysiamkk/Internship/blob/main/Week%208/riemann-client.py)
 
 * I am collecting and sending event every 10 seconds to make sure metrics are as accurate as possible at any point in time.
