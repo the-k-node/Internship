@@ -14,3 +14,39 @@
 * [Week 6](https://github.com/alwaysiamkk/Internship/tree/main/Week%206)
 * [Week 7](https://github.com/alwaysiamkk/Internship/tree/main/Week%207)
 * [Week 8 & Week 9](https://github.com/alwaysiamkk/Internship/tree/main/Week%208)
+
+>### Skills
+ 
+ * W1:
+    * [virtualbox](https://www.virtualbox.org)
+    * [ubuntu focal](https://releases.ubuntu.com/20.04/)
+    * [openssh](https://www.openssh.com)
+    * [packer](https://www.packer.io)
+ 
+ * W2:
+    * [bash](https://www.gnu.org/software/bash/)
+    * [perl](https://www.perl.com/article/perl-and-cgi/)
+    * [python](https://www.python.org)
+
+* W3:
+    * [BGP using FRR](https://docs.frrouting.org/en/latest/bgp.html)
+
+* W4:
+    * [maria db](https://mariadb.org)
+    * [mysql](https://dev.mysql.com/doc/)
+
+* W5:
+    * [ansible](https://www.ansible.com)
+
+* W6:
+    * [aerospike](https://aerospike.com)
+
+* W7:
+    * ansible + aerospike
+
+* W8 & W9:
+    * [collectd](https://collectd.org)
+    * aerospike
+    * [influxdb](https://www.influxdata.com)
+    * [grafana](https://grafana.com)
+    * [riemann](https://riemann.io)
