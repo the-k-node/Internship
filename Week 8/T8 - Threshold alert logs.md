@@ -12,7 +12,7 @@
     <not_specified> | gray
     ok | green
     warning | yellow
-    critical | orange
+    critical | orange or red
 
 * We can change `riemann.config` of riemann server to see the logs for not just `expired` events and also `warning` & `critical` alerts, by adding
     ```clj
