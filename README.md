@@ -14,7 +14,7 @@
 * [Week 6](https://github.com/alwaysiamkk/Internship/tree/main/Week%206)
 * [Week 7](https://github.com/alwaysiamkk/Internship/tree/main/Week%207)
 * [Week 8 & 9](https://github.com/alwaysiamkk/Internship/tree/main/Week%208)
-* [Week 10 & 11](https://github.com/alwaysiamkk/Internship/tree/main/Week%209)
+* [Week 10 & 11](https://github.com/alwaysiamkk/Internship/tree/main/Week%2010%20%26%2011)
 
 
 >### Skills
