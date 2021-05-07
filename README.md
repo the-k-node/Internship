@@ -13,7 +13,8 @@
 * [Week 5](https://github.com/alwaysiamkk/Internship/tree/main/Week%205)
 * [Week 6](https://github.com/alwaysiamkk/Internship/tree/main/Week%206)
 * [Week 7](https://github.com/alwaysiamkk/Internship/tree/main/Week%207)
-* [Week 8 & Week 9](https://github.com/alwaysiamkk/Internship/tree/main/Week%208)
+* [Week 8 & 9](https://github.com/alwaysiamkk/Internship/tree/main/Week%208)
+* [Week 10 & 11](https://github.com/alwaysiamkk/Internship/tree/main/Week%209)
 
 
 >### Skills
