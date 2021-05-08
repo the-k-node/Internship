@@ -57,4 +57,4 @@ Topology description:
     * Host 1 will be able to ping the loopback IP of Host 2 and vice versa
     * Host 3 will not be reachable from host 1 and host 2
 
-  Move host 2 to VRF 2, and repeat the tests
+  * Move host 2 to VRF 2, and repeat the tests
