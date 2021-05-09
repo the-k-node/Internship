@@ -53,24 +53,24 @@ H3 | `enp0s3` | `10.3.1.3/24`
         R4(config-router)# neighbor 10.5.1.10 prefix-list ROUTE out
         ```
 
-        * On other router VMs (`R1`,`R2`,`R3`):
-            * (`R1` considered)
-            ```bash
-            $ vtysh
-            ```
-            ```ios
-            R1# conf
-            R1(config)# router bgp 10
-            R1(config-router)# neighbor 10.5.1.1 remote-as 100
-            R1(config-router)# address-family ipv4
-            R1(config-router-af)# neighbor 10.5.1.1 activate
-            R1(config-router-af)# exit
-            R1(config-router)# exit
-            !to avoid (Policy) in state column on `sh ip bgp sum` command
-            R1(config)# ip prefix-list ROUTE permit any
-            R1(config)# router bgp 10
-            R1(config-router)# neighbor 10.5.1.1 prefix-list ROUTE in
-            R1(config-router)# neighbor 10.5.1.1 prefix-list ROUTE out
-            ```
-            
-            for VMs `R2` & `R3`, ASNs are `20` & `30` respectively.
+    * On other router VMs (`R1`,`R2`,`R3`):
+        * (`R1` considered)
+        ```bash
+        $ vtysh
+        ```
+        ```ios
+        R1# conf
+        R1(config)# router bgp 10
+        R1(config-router)# neighbor 10.5.1.1 remote-as 100
+        R1(config-router)# address-family ipv4
+        R1(config-router-af)# neighbor 10.5.1.1 activate
+        R1(config-router-af)# exit
+        R1(config-router)# exit
+        !to avoid (Policy) in state column on `sh ip bgp sum` command
+        R1(config)# ip prefix-list ROUTE permit any
+        R1(config)# router bgp 10
+        R1(config-router)# neighbor 10.5.1.1 prefix-list ROUTE in
+        R1(config-router)# neighbor 10.5.1.1 prefix-list ROUTE out
+        ```
+        
+        for VMs `R2` & `R3`, ASNs are `20` & `30` respectively.
