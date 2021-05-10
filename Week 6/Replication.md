@@ -18,4 +18,4 @@
     4. Live cluster reconfiguration and subsequent data rebalancing is simple, non-disruptive and efficient.
 
 * A partition assignment algorithm generates a replication list for every partition. The replication list is a permutation of the cluster succession list.
-    ![partition map]()
+    ![partition map](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/Partition%20Map%20.png)
