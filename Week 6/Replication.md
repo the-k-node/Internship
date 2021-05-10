@@ -1,4 +1,4 @@
-> Aerospike Data Replication
+>### Aerospike Data Replication
 
 * Aerospike uses certain standards and techniques for the data replication among its nodes.
 
@@ -19,3 +19,14 @@
 
 * A partition assignment algorithm generates a replication list for every partition. The replication list is a permutation of the cluster succession list.
     ![partition map](https://github.com/alwaysiamkk/Internship/blob/main/Week%206/Partition%20Map%20.png)
+
+* The process of moving records from one node to another node is termed a migration.
+
+* Once consensus is reached on a new cluster view, all the nodes in a cluster run the distributed partition assignment algorithm and assign the master and one or more replica nodes to each of the partitions.
+
+* Conclusion: 
+    * Uniform distribution of data, associated metadata like indexes, and transaction workload make capacity planning and scaling up and down decisions precise and simple for Aerospike clusters.
+
+    * Aerospike needs redistribution of data only on changes to cluster membership. 
+    
+    * This contrasts with alternate key range based partitioning schemes, which require redistribution of data whenever a range becomes "larger” than the capacity on its node.
