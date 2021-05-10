@@ -30,3 +30,8 @@
     * Aerospike needs redistribution of data only on changes to cluster membership. 
     
     * This contrasts with alternate key range based partitioning schemes, which require redistribution of data whenever a range becomes "larger” than the capacity on its node.
+
+* Bibliography
+    * https://docs.aerospike.com/docs/architecture/index.html
+    * https://docs.aerospike.com/docs/architecture/data-distribution.html
+    * https://docs.aerospike.com/docs/architecture/assets/vldb2016.pdf
