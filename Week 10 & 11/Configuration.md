@@ -1,4 +1,4 @@
->Topology Description Tasks:
+> Topology Description Tasks:
 
 * Ubuntu + FRR
 
@@ -106,3 +106,11 @@
         $ net commit
         ```
         similarly for `R2` & `R3`, use ASN `20` & `30` with advertising `10.5.1.4/30` & `10.5.1.8/30` respectively.
+        
+    * Verify the routes using
+         ```bash
+         traceroute 10.5.1.20
+         or
+         net show route 10.5.1.20
+         ```
+         and can check the hops, routes, & routing protocols utilized.
