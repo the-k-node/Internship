@@ -52,3 +52,9 @@
     * [influxdb](https://www.influxdata.com)
     * [grafana](https://grafana.com)
     * [riemann](https://riemann.io)
+
+* W10 & W11:
+    * [cumulus VX](https://docs.nvidia.com/networking-ethernet-software/cumulus-vx/VirtualBox/)
+    * e-bgp
+    * [vxlan](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-43/Network-Virtualization/VXLAN-Routing/)
+    * [evpn](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-43/Network-Virtualization/Ethernet-Virtual-Private-Network-EVPN/)
