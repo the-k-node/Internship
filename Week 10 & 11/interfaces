@@ -1,0 +1,41 @@
+source /etc/network/interfaces.d/*.intf
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+    address 1.1.1.1/32
+
+# Interface used for bridged adapter
+auto eth0
+iface eth0 inet dhcp
+    vrf mgmt
+
+auto swp1
+iface swp1
+        address 10.5.1.2/30
+
+auto swp2
+iface swp2
+        bridge-access 10
+        address 10.3.1.11/24
+
+auto bridge
+iface bridge
+    bridge-ports vni10 swp2
+    bridge-vids 10
+    bridge-vlan-aware yes
+
+auto mgmt
+iface mgmt
+    address 127.0.0.1/8
+    address ::1/128
+    vrf-table auto
+
+auto vni10
+iface vni10
+    bridge-access 10
+    bridge-learning off
+    mstpctl-bpduguard yes
+    mstpctl-portbpdufilter yes
+    vxlan-id 10
+    vxlan-local-tunnelip 1.1.1.1
