@@ -103,7 +103,7 @@
 
 * Verify the setup and try
     ```nclu
-    $ ping 10.3.1.2       #from H1
+    $ ping 10.3.1.2           #from H1
     $ traceroute 10.3.1.2     #would display only 1 node, as it has no idea about the underlays
     ```
     try for all other hosts too.
