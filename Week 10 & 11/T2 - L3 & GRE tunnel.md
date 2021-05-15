@@ -3,7 +3,7 @@
 * L3 connectivity using Hosts loopback IPs,
 
     Host | interface | IP
-    :--: | :--:
+    :--: | :--: | :--:
     H1 | `lo` | `10.10.1.1/32`
     H2 | `lo` | `10.10.1.2/32`
     H3 | `lo` | `10.10.1.3/32`
