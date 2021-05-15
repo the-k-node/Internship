@@ -1,6 +1,6 @@
 >Task 1:
 
-![topology](https://github.com/alwaysiamkk/Internship/blob/main/Week%2010%20%26%2011/task1%20-%20topology.png)
+![topology](https://github.com/alwaysiamkk/Internship/blob/main/Week%2010%20%26%2011/t1.topology.png)
 
 * In above topology, we see `R4` is `Spine` and `R1`, `R2`, & `R3` are `leaves` in a Spine-leaf architecture.
 
@@ -99,7 +99,7 @@
     ```
     this time you should be able to see multiple mac addresses having interface as `vni10` which are learnt through that vni10 tunnel and a mac learnt locally or `self` through `swp2` port. For example (in `R1`),
 
-    ![macs-learnt-screenshot](https://github.com/alwaysiamkk/Internship/blob/main/Week%2010%20%26%2011/macs-learnt-output.png)
+    ![macs-learnt-screenshot](https://github.com/alwaysiamkk/Internship/blob/main/Week%2010%20%26%2011/t1.macs-learnt-output.png)
 
 * Verify the setup and try
     ```nclu
