@@ -58,3 +58,5 @@
     * e-bgp
     * [vxlan](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-43/Network-Virtualization/VXLAN-Routing/)
     * [evpn](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-43/Network-Virtualization/Ethernet-Virtual-Private-Network-EVPN/)
+    * [gre](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-36/Layer-3/GRE-Tunneling/)
+    * [vrf](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-41/Layer-3/Virtual-Routing-and-Forwarding-VRF/)
