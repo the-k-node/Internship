@@ -42,9 +42,9 @@
     ```
     that should display all the three node addresses under this address family.
 
-* We need to advertise all the loopback IPs from the leaf nodes using
+* We need to advertise loopback IPs, each leaf node advertises its own lo IP eg- `R1` advertises `1.1.1.1`,
     ```nclu
-    $ net add bgp <loopackIP>/32
+    $ net add bgp network <loopackIP>/32
     $ net commit
     ```
 
@@ -59,7 +59,7 @@
 
 * So, we have the complete underlay setup, now we need the overlay for creating the required tunnel and learning the addresses using Control-pane learning method (BUM traffic not handled). So now, we have to create a VNID using a VLAN number and create a virtual interface for VTEP.
 
-* Create a new virtual interface `vni10`, and associate it with VNID `10` & add VLAN `10` to `vni10`,
+* Create a new virtual interface `vni10`, and associate it with VNID `10` & add VLAN `10` to `vni10`. On all leaf nodes,
     ```nclu
     $ net add vxlan vni10 vxlan id 10
     $ net add vxlan vni10 bridge access 10
@@ -68,7 +68,7 @@
     ```
     now we need to specify the loopback IP for making it as the source tunnel ip,
     ```nclu
-    $ net add vxlan vni10 vxlan local-tunnelip 1.1.1.1/32     #for R1 lo
+    $ net add vxlan vni10 vxlan local-tunnelip 1.1.1.1     #for R1 lo
     ```
     similarly add for `R2` & `R3` with their respective lo s and commit the changes.
 
@@ -99,7 +99,7 @@
     ```
     this time you should be able to see multiple mac addresses having interface as `vni10` which are learnt through that vni10 tunnel and a mac learnt locally or `self` through `swp2` port. For example (in `R1`),
 
-    ![macs-learnt-screenshot](https://github.com/alwaysiamkk/Internship/blob/main/Week%2010%20%26%2011/t1.macs-learnt-output.png)
+    ![macs-learnt-screenshot](https://i.ibb.co/mG73tGj/macs-learnt-output.png)
 
 * Verify the setup and try
     ```nclu
