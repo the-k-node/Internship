@@ -61,6 +61,9 @@
 
     # net del bgp vrf vrf-1 neighbor 10.5.1.6 remote-as 20            #remove the neighbor from vrf-1 bgp configuration
     # net add bgp vrf vrf-2 neighbor 10.5.1.6 remote-as 20            #add the neighbor to vrf-2 bgp configuration
+    
+    # net pending
+    # net commit
     ```
 
 * Finally verify the setup by checking the routes and using ping command to verify the connection configured.
