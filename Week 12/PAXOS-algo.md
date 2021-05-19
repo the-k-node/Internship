@@ -117,3 +117,12 @@ If no
 do not respond (or respond with a “fail” message)  
 ```  
 * If the proposer receives a PROMISE response from a majority of acceptors, it now knows that a majority of them are willing to participate in this proposal. The proposer can now proceed with getting consensus. Each of these acceptors made a promise that no other proposal with a smaller number can make it to consensus.
+
+>summary
+
+* in short, 
+        * In the first phase, 
+            * the proposer finds out that no promises have been made to higher numbered proposals. 
+        * In the second phase, 
+            * the proposer asks the acceptors to accept the proposal with a specific value. 
+            * As long as no higher numbered proposals have arrived during this time, the acceptor responds back that the proposal has been accepted.
