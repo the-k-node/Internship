@@ -126,3 +126,19 @@ do not respond (or respond with a “fail” message)
     * In the second phase, 
         * the proposer asks the acceptors to accept the proposal with a specific value. 
         * As long as no higher numbered proposals have arrived during this time, the acceptor responds back that the proposal has been accepted.
+
+
+##Engineering Paxos
+
+* Group management
+    * The cluster of systems that are running Paxos needs to be administered. 
+    * able to add systems to the group, remove them, and detect if any processes, entire systems, or network links are dead. 
+    * Each proposer needs to know the set of acceptors so it can communicate with them and needs to know the learners.
+
+* Byzantine failures
+    * We assumed that none of the systems running Paxos suffer Byzantine failures. 
+    * That is, either they run and communicate correctly or they stay silent. 
+    * In real life, however, Byzantine failures do exist. 
+    * We can guard against network problems with mechanisms such as checksums or, if we fear malicious interference, digital signatures. 
+    * However, we do need to worry about a misbehaving proposer that may inadvertantly set its proposal ID to infinity (e.g., INFINITY in math.h in C or math.inf in Python if using floats; otherwise INT_MAX in C or sys.maxint in Python). 
+    * This puts the Paxos protocol into a state where acceptors will have to reject any other proposal.
