@@ -121,8 +121,8 @@ do not respond (or respond with a “fail” message)
 >summary
 
 * in short, 
-        * In the first phase, 
-            * the proposer finds out that no promises have been made to higher numbered proposals. 
-        * In the second phase, 
-            * the proposer asks the acceptors to accept the proposal with a specific value. 
-            * As long as no higher numbered proposals have arrived during this time, the acceptor responds back that the proposal has been accepted.
+    * In the first phase, 
+        * the proposer finds out that no promises have been made to higher numbered proposals. 
+    * In the second phase, 
+        * the proposer asks the acceptors to accept the proposal with a specific value. 
+        * As long as no higher numbered proposals have arrived during this time, the acceptor responds back that the proposal has been accepted.
