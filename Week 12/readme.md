@@ -1,7 +1,7 @@
 ># Tasks - Week 12
 
 ```
-Topic : Complete App Deployment using Mesos - Marathon
+Topic : Docker, Complete App Deployment using Mesos - Marathon
 ```
 
 * 1: Create a Docker container running a python webserver, that listens on port 80 and returns the string "Hello world" for any requests
