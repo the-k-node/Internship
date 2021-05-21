@@ -2,7 +2,7 @@
 
 - Namespaces are a **kernel mechanism for limiting the visibility that a group of processes has of the rest of a system**.
 
-- The purpose of each namespace is to **wrap a particular global system resource** in an **abstraction** that makes it appear to the **processes** within the namespace that they have their own **isolated instance of the global resource**.
+- The purpose of namespaces is to **wrap a particular global system resource** in an **abstraction** that makes it appear to the **processes** within the namespace that they have their own **isolated instance of the global resource**.
 
 - _For example - you can limit visibility to certain process trees, network interfaces, user IDs or filesystem mounts._
 
