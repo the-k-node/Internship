@@ -1,0 +1,12 @@
+[http.middlewares.simpleAuth.basicAuth]
+  users = [
+    "kiran:$apr1$lNKB9yL9$yLWlWdHOTvcuvhHPLgpdW/"
+  ]
+
+[http.routers.api]
+  rule = "Host(`192.168.100.241`)"
+  entrypoints = ["websecure"]
+  middlewares = ["simpleAuth"]
+  service = "api@internal"
+  [http.routers.api.tls]
+    certResolver = "lets-encrypt"
