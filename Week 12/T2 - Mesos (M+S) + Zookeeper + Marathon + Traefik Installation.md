@@ -37,7 +37,7 @@
     if find an error for `libevent-dev` package, use
 
     ```bash
-    $ sudo apt-get --fix-broken Install
+    $ sudo apt-get --fix-broken install
     ```
 
     <br>
@@ -50,7 +50,7 @@
 
     <br>
 
-  4. make required configurations for `mesos-server`,
+  4. make required configurations for `mesos-master`,
 
     <br>
 
@@ -71,10 +71,10 @@
 
       <br>
 
-    - Make sure the `mesos-slave` doesn't start on startup,
+    - Make sure the `mesos-slave` doesn't start on boot,
 
       ```sh
-      $ echo manual | sudo tee /etc/init/mesos-slave.override
+      $ echo manual | sudo tee /etc/init.d/mesos-slave.override
       ```
 
 - Install **Zookeeper** and make required configurations,
@@ -158,10 +158,12 @@
 
     ```
     MARATHON_MESOS_USER=root
-    MARATHON_MASTER="zk://10.1.1.4:2181/mesos"
-    MARATHON_ZK="zk://10.1.1.4:2181/marathon"
-    MARATHON_HOSTNAME="10.1.1.4"
+    MARATHON_MASTER="zk://192.168.100.238:2181/mesos"
+    MARATHON_ZK="zk://192.168.100.238:2181/marathon"
+    MARATHON_HOSTNAME="192.168.100.238"
     ```
+
+    where `192.168.100.238` is my **master's IP**
 
 - Restart all the tools we installed and configured,
 
@@ -181,8 +183,51 @@
     $ sudo service mesos-master restart
     ```
 
-  3. Marathon
+  3. Marathon - change the `java` to version 8,
 
     ```sh
-    $ sudo service mesos-master restart
+    $ update-alternatives --config java       #select java8 - usually option 2
+    $ sudo service marathon restart
+    ```
+
+- Verify the setup by accessing both **mesos-master**'s & **marathon**'s dashboard, access their respective port for that master's address to get the web UI interface.
+
+  - **mesos-master**: `192.168.100.238:5050`
+  - **marathon**: `192.168.100.238:8080`
+
+# b. Mesos Slave & Docker
+
+- As I already installed **docker** on `VM2`, installing and configuring **Mesos Slave** on VM2 should be satisfying the requirements.
+
+<br>
+
+- For installing `mesos-slave`, follow the steps **1-3** used in installing `mesos-master` including `java` dependencies above them.
+
+<br>
+
+- Make sure the `mesos-master` doesn't start on boot,
+
+  ```sh
+  $ echo manual | sudo tee /etc/init/mesos-master.override
+  ```
+
+<br>
+
+- Make required configurations - add IP addresses to config files
+
+  <br>
+
+  1. Make two files `id` & `hostname`, and add just the slave's bridge IP eg: **192.168.100.228** for accessing dashboard and see this node as slave/agent.
+
+    ```sh
+    $ vim /etc/mesos-slave/id
+    $ cp /etc/mesos-slave/id /etc/mesos-slave/hostname
+    ```
+
+    <br>
+
+  2. Edit the `zk` file and replace **localhost** to `mesos-master`'s bridge IP like **zk://92.168.100.238:2181/mesos**
+
+    ```sh
+    $ vim /etc/mesos/zk
     ```
