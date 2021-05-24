@@ -1,5 +1,13 @@
 > # Task 2
 
+# configuration
+
+VM | Bridge IP
+:----: | :----:
+VM1-mes-master | 192.168.100.238/24
+VM2-mes-slave | 192.168.100.228/24
+VM3-traefik | 192.168.100.242/24
+
 # a. Mesos Master, Marathon, & Zookeeper
 
 - Setup for `java` dependencies
@@ -231,3 +239,56 @@
     ```sh
     $ vim /etc/mesos/zk
     ```
+
+# c. Traefik
+
+- Installing **traefik** on `VM3` requires **docker-ce** to create a container for traefik,
+
+  ```sh
+  $ sudo apt-get install docker-ce
+  ```
+
+  <br>
+
+- Install apache-utils for using using _letsencrypt_ for basic authentication before accessing **traefik dashboard**, use _htpasswd_ utility to generate authentication details.
+  ```sh
+  $ sudo apt-get install -y apache2-utils
+  $ htpasswd -nb <username> <password>
+  # copy the encrypted username:password
+  ```
+
+  <br>
+
+- Add the `toml` configuration for **traefik** to make it available through ports `80` & `433`, and configure `marathon` as **provider** - [traefik.toml](https://github.com/alwaysiamkk/Internship/blob/main/Week%2012/T2/c/traefik.toml).
+
+<br>
+
+- Use the _encrypted authentication details_ generated before and create [traefik_secure.toml](https://github.com/alwaysiamkk/Internship/blob/main/Week%2012/T2/c/traefik_secure.toml) file.
+
+<br>
+
+- Create a network interface for docker named **web** to be used by traefik container,
+  ```sh
+  $ docker network create web
+  ```
+<br>
+
+- Create a file named `acme.json`, and assign `600` permissions, once this json file moves to docker container the ownership will get changed to **root** automatically.
+
+<br>
+
+- Create a `traefik` container using all these configurations,
+  ```sh
+  $ docker run -d \
+   -v /var/run/docker.sock:/var/run/docker.sock \
+   -v $PWD/traefik.toml:/traefik.toml \
+   -v $PWD/traefik_secure.toml:/traefik_secure.toml \
+   -v $PWD/acme.json:/acme.json \
+   -p 80:80 \
+   -p 443:443 \
+   --network web \
+   --name traefik \
+    traefik:v2.4
+  ```
+
+- Check docker **processes** to verify that container is running usinf `docker ps -a`, and if running successfully, verify the setup by accessing `<BridgeIP>:80` or `<BridgeIP>:443` for checking the traefik **dashboard**.
