@@ -1,0 +1,12 @@
+{
+    "id": "basic-5",
+    "cmd": "while [ true ] ; do echo 'Hello KKKK' ; sleep 5 ; done",
+    "cpus": 0.1,
+    "mem": 10.0,
+    "instances": 1,
+    "labels":{
+        "traefik.enable": "true",
+        "traefik.http.routers.router0.rule": "Host(`192.168.100.242:80`)",
+        "traefik.http.routers.myproxy.rule": "Host(`192.168.100.242`)"
+    }
+}

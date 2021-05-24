@@ -1,0 +1,24 @@
+{
+  "id": "docker-flask",
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 256,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "alwaysiamkk/flask-container",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "labels": {
+    "traefik.enable": "true",
+    "traefik.http.routers.router0.rule": "Host(`192.168.100.242:80`)"
+  }
+}
