@@ -9,14 +9,25 @@
 
 [api]
   dashboard = true
+
 [certificatesResolvers.lets-encrypt.acme]
   email = "kiran.intern@phonepe.com"
   storage = "acme.json"
   [certificatesResolvers.lets-encrypt.acme.tlsChallenge]
 
 [providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
   watch = true
   network = "web"
 
 [providers.file]
   filename = "traefik_secure.toml"
+
+[pilot]
+    token = "0ffefceb-e489-4992-944d-78f10febafcd"
+
+[providers.marathon]
+  endpoint = "http://master.mesos.kk:8080"
+  exposedByDefault = true
+  watch = true
+  respectReadinessChecks = true
