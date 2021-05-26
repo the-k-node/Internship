@@ -1,7 +1,7 @@
 ># Tasks - Week2
 
 ```
-Topics : Bash, Perl, Python, Docker
+Topics : Bash, Perl, Python
 ```
 
 The following is the task:
@@ -41,6 +41,3 @@ The stats on the web page/script should show the following:
 7. get all the requests in the specified timestamp (UI should have the capability to accept to and from timestamp Ex: from: 06/Mar/2021:04:48 to 06/Mar/2021:04:58)
 
 8. the app should also be able to take the host (Ex: apptwo-new.ppops.com) as input and give the stats mentioned above.
-
-* Additional task:
-Create 2 docker images for the above perl and python application. We should be able to access/use the application if the docker container is created from the image.
