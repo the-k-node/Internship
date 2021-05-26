@@ -1,9 +1,9 @@
 from flask import Flask, flash, render_template, request, redirect, url_for
-import os 
 from werkzeug.utils import secure_filename
+from datetime import datetime as dt
+import os 
 import csv
 import subprocess
-from datetime import datetime as dt
 
 app = Flask(__name__)
 
@@ -15,7 +15,6 @@ def convert_log_to_csv(filename):
     with open('converted.csv', 'w') as out_file,open('uploads/'+filename,'r') as in_file:
 
         writer = csv.writer(out_file)
-        # writer.writerow(['ip', 'datetime','gmt', 'method', 'path', 'httpversion', 'status_code', 'response'])
 
         for line in in_file:
             columns = line[:-1].split(' ')
@@ -47,19 +46,14 @@ def display_record():
             if logfile.filename == '':
 
                 flash('No file selected for uploading', "danger")
-                # print('Please Upload a file')
                 return redirect(request.url)
-
-            # print(logfile)
 
             logfile.save(os.path.join(app.config['FILE_UPLOAD'], secure_filename(logfile.filename)))
             
             flash('File successfully uploaded',"success")
 
-            # print('file saved')
 
             decoded_file = logfile.filename #Takes file name so that we can pass it to the convert_log_to_csv function.
-            # print(decoded_file)
 
         '''Calling Function with filename as argument.'''
         convert_log_to_csv(decoded_file) 
@@ -76,25 +70,17 @@ def display_record():
             if val not in date_list:
                 date_list.append(val) 
         
-    # print(date_list)
-
     bash_highest_requested_list = []
 
     for i in date_list:
         bash_highest_requested_list.append(subprocess.check_output(['bash', '-c', f'. day_wise.sh; highest_requested {i}'], text=True))
-
-    # print(date_list)
-    # print(*bash_highest_requested_list, sep = "\n")
-
-    # edited = ('\n'.join(map(str, bash_highest_requested_list)))
-    # print(edited)
+        
     bash_output_date_wise = zip(date_list, bash_highest_requested_list)
 
     bash_output = []
     bash_output.append(subprocess.check_output(['bash', '-c', '. test.sh'], text=True))
     bash_output = ('\n'.join(map(str, bash_output)))
     print(bash_output)
-    # print(other_ans_list)
     return render_template('record.html', data_date_wise=bash_output_date_wise,  other_bash=bash_output, date=date_list)
    
 
@@ -113,15 +99,8 @@ def timestamp():
         print(totime)
         date1 = dt.strptime(fromdate, "%d/%b/%Y")
         date2 = dt.strptime(todate, "%d/%b/%Y")
-            # print(date1 > date2)
-            # print(date1 < date2)
-            # print(date1 == date2)
-            # print("Time")
         time1 = dt.strptime(fromtime, "%H:%M:%S")
         time2 = dt.strptime(totime, "%H:%M:%S")
-            # print(time1 > time2)
-            # print(time1 < time2)
-            # print(time1 == time2)
     
         if(date1 > date2):
             flash('Error!! Check your from date', "danger")
@@ -133,21 +112,14 @@ def timestamp():
             else:
                 try:
                     specified_datetime_record.append(subprocess.check_output(['bash', '-c', f'. specified_timestamp.sh; specified_timestamp {fromdate} {fromtime} {todate} {totime}'], text=True))
-                    # flash(f'Record from {fromdate}:{fromtime} to {todatete}:{totime}', "success")
                 except:
                     flash('Offfoo !!! Error occured', 'danger')
         else:
             try:
                 specified_datetime_record.append(subprocess.check_output(['bash', '-c', f'. specified_timestamp.sh; specified_timestamp {fromdate} {fromtime} {todate} {totime}'], text=True))
             except:
-                 flash('Offfoo !!! Please enter the timstamps correctly', 'danger')
-    
-        # print(specified_datetime_record)
+                 flash('OMG !!! Please enter the timstamps correctly', 'danger')
 
-    
-    
-
-        # print(hostname)
     return render_template('timestamp.html', record_date=specified_datetime_record)
 
 @app.route('/host_record', methods=['GET', 'POST'])
@@ -160,18 +132,13 @@ def hostname_record():
 
         if hostname not in host_list:
             flash(f"Enter correct host name!! BTW These are the hostnames {host_list} ", "info")
-            # return redirect(request.url)
+
         else:
             flash(f'Great your record of host - {hostname}', "success")
-            # host_record = []
     
             for i in host_list:
                 host_record.append(subprocess.check_output(['bash', '-c', f'. host_details.sh; get_last_status_code {i}'], text=True))
-    
-                # flash(f"Enter correct host name!! BTW These are the hostnames {host_list} ", "info")
-            # print(host_record)
-            # return redirect(url_for('hostname_record', host_name=hostname))
-    # print(host_record)
+   
     return render_template('app_record.html', host_data=host_record)
 
 if __name__ == "__main__":
