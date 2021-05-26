@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mt-3">
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+            <span><strong>NOTE: I have tried to format the below output in a better way.</strong></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  {% for element1, element2 in data_date_wise %}
+
+  <p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#demo-{{loop.index}}"
+      aria-expanded="false" aria-controls="demo-{{loop.index}}">{{element1}}</button>
+  <div class="row">
+    <div class="col">
+      <div class="collapse {{loop.index}}" id="demo-{{loop.index}}">
+        <div class="card card-body">
+          {{element2}}
+        </div>
+      </div>
+    </div>
+  </div>
+  </p>
+
+  {% endfor %}
+</div>
+
+<form method="POST" action="/timestamp" enctype="multipart/form-data">
+  <label for="from">From:</label>
+  <select name="from-date" id="from-date">
+    {% for i in date %}
+    <option value="{{i}}">{{i}}</option>
+    {% endfor %}
+  </select>
+
+  <input type="time" step="1" id="from-time" name="from-time" required>
+
+  <label for="to">To:</label>
+  <select name="to-date" id="to-date">
+    {% for i in date %}
+    <option value="{{i}}">{{i}}</option>
+    {% endfor %}
+  </select>
+
+  <input type="time" step="1" id="to-time" name="to-time" required>
+
+
+  <button type="submit" class="btn btn-outline-primary">SUBMIT</button>
+
+</form>
+
+
+<form method="POST" action="/host_record" enctype="multipart/form-data">
+  
+<div class="form-row align-items-center">
+    <div class="col-sm-3 my-1">
+      <label class="sr-only" for="inlineFormInputName">Host Name</label>
+      <input type="text" name="hostname" class="form-control" id="inlineFormInputName" placeholder="Enter HostName..." required>
+    </div>
+  <button type="submit" class="btn btn-outline-primary">SUBMIT</button>
+
+</form>
+
+
+
+<div class="row">
+  <div class="col">
+    <div class="card card-body">
+      {{other_bash}}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

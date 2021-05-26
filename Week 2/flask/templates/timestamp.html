@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+            <span><strong>NOTE: I tried to format the below output in a better way.</strong></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+{% if record_date|length >= 1 %}
+<div class="row">
+    <div class="col">
+    
+        <div class="card card-body">
+          {% for i in record_date %}
+{{i}}
+{% endfor %}
+        </div>
+      
+    </div>
+  </div>
+
+{% else %}
+<p> Sorry no record found </p>
+{% endif %}
+{% endblock %}  

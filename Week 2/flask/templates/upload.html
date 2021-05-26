@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="my-5">Select a file to upload</h2>
+<form method="POST" action="/record" enctype="multipart/form-data">
+    
+    <div class="mt-2 input-group mb-3">
+        
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" name="logfile" aria-describedby="inputGroupFileAddon01" accept=".log, .csv" required>
+            <label class="custom-file-label" for="inputGroupFile01">Choose file... (only .log and .csv file)</label>
+        </div>
+    </div> 
+    <button type="submit" class="btn btn-outline-primary btn-lg btn-block">UPLOAD FILE</button>
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    $('input[type="file"]').change(function (e) {
+        var fileName = e.target.files[0].name;
+        // change name of actual input that was uploaded
+        $(e.target).next().html(fileName);
+    });
+</script>
+{% endblock scripts %}
