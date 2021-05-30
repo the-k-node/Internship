@@ -1,0 +1,41 @@
+// with sh variables
+pipeline {
+  agent any
+  stages {
+    stage ("Task A") {
+      steps {
+        script {
+            NUM1 = input message: 'Please enter the num1',
+                             parameters: [string(defaultValue: '',
+                                          name: 'Number 1')]
+            NUM2 = input message: 'Please enter the num2',
+                             parameters: [string(defaultValue: '',
+                                          name: 'Number 2')]
+            NUM3 = (NUM1 as int) + (NUM2 as int)
+        }
+        echo "Number 1: ${NUM1} \nNumber 2: ${NUM2} \nResult: ${NUM3}"
+      }
+    }
+  }
+}
+
+// with env variables
+pipeline {
+  agent any
+  stages {
+    stage ("Task A") {
+      steps {
+        script {
+            env.NUM1 = input message: 'Please enter the num1',
+                             parameters: [string(defaultValue: '',
+                                          name: 'Number 1')]
+            env.NUM2 = input message: 'Please enter the num2',
+                             parameters: [string(defaultValue: '',
+                                          name: 'Number 2')]
+            env.NUM3 = (env.NUM1 as int) + (env.NUM2 as int)
+        }
+        echo "Number 1: ${env.NUM1} \nNumber 2: ${env.NUM2} \nResult: ${env.NUM3}"
+      }
+    }
+  }
+}
