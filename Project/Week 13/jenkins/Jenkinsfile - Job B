@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  stages {
+    stage ('Job B'){
+        steps {
+            script{
+                if (((ARes as int) % 2) == 0){
+                    echo 'Result is EVEN'
+                }
+                else{
+                    echo 'Result is ODD'
+                }
+            }
+        }
+    }
+  }
+}
