@@ -9,3 +9,4 @@
 - Job C - divide the result of Job B by 2 and print the result
 - Job D - multiply the result of Job B by 2 and print the result
 - Job E - multiply the result of either Job C or Job D(whichever ran) by itself and check if that is an even number or not and print that result
+![pipeline diagram](https://github.com/alwaysiamkk/Internship/blob/main/Project/Week%2013/jenkins/jenkins%20-%20tasks.png)
