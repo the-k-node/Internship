@@ -1,0 +1,59 @@
+def eVar = 0;
+def oddFlag = false, evenFlag = false;
+pipeline {
+  agent any
+  stages {
+    stage ("Job A") {
+      steps {
+        script {
+            ARes = (env.num1 as int) + (env.num2 as int)
+        }
+        echo "Number 1: ${env.num1} \nNumber 2: ${env.num2} \nResult: ${ARes}"
+      }
+    }
+    stage ('Job B') {
+        steps {
+            script{
+                if (((ARes as int) % 2) == 0){
+                    echo 'Result is EVEN'
+                    evenFlag = true
+                }
+                else{
+                    echo 'Result is ODD'
+                    oddFlag = true
+                }
+            }
+        }
+    }
+    stage ('Job C') {
+        when {
+            expression { evenFlag == true }
+        }
+        steps {
+            script {
+                eVar = (ARes as int)/2
+            }
+            echo "Job C (even Job): Divide the ${ARes} by 2: ${eVar}"
+        }
+    }
+    stage ('Job D') {
+        when {
+            expression { oddFlag == true }
+        }
+        steps {
+            script {
+                eVar = (ARes as int)*2
+            }
+            echo "Job D (odd Job): Multiply the ${ARes} with 2: ${eVar}"
+        }
+    }
+    stage ('Job E') {
+        steps{
+            script{
+                finalRes = eVar*eVar
+                echo "Job E: Multiplied the variable -> ${finalRes}"
+            }
+        }
+    }
+  }
+}
