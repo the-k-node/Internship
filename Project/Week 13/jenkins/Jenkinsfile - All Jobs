@@ -41,7 +41,7 @@ pipeline {
             expression { oddFlag == true }
         }
         steps {
-            script {
+            script { 
                 eVar = (ARes as int)*2
             }
             echo "Job D (odd Job): Multiply the ${ARes} with 2: ${eVar}"
@@ -52,6 +52,11 @@ pipeline {
             script{
                 finalRes = eVar*eVar
                 echo "Job E: Multiplied the variable -> ${finalRes}"
+                if((finalRes as int) % 2 == 0){
+                    echo "${finalRes} is an even number"
+                }else{
+                    echo "${finalRes} is an odd number"
+                }
             }
         }
     }
