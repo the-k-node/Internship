@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    tools {
+        "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform"
+    }
+    environment {
+        https_proxy = "http://tinyproxy:8888"
+        http_proxy = "http://tinyproxy:8888"
+
+        TF_HOME = tool('terraform')
+        TF_IN_AUTOMATION = "true"
+        PATH = "$TF_HOME:$PATH"
+    }
+    stages {
+        stage('create JSON'){
+            steps {
+                dir("module"){
+                    sh "mkdir -p json"
+                }
+                dir("module/json"){
+                    writeFile file: 'app.json', text: params.app
+                }
+            }
+        }
+        stage('initialize Terraform'){
+            steps {
+                dir("module/vm-module"){
+                    sh "terraform init"
+                }
+            }
+        }
+        stage('validate Terraform'){
+            steps {
+                dir("module/vm-module/"){
+              		  sh "terraform validate"
+                }
+            }
+        }
+        stage('plan Terraform'){
+            steps {
+                    dir("module/vm-module/"){
+                    withCredentials([azureServicePrincipal(
+                    credentialsId: 'azr_key',
+                    subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
+                    clientIdVariable: 'ARM_CLIENT_ID',
+                    clientSecretVariable: 'ARM_CLIENT_SECRET',
+                    tenantIdVariable: 'ARM_TENANT_ID')]) {
+                        sh 'terraform plan -var-file ../json/app.json'
+                    }
+                }
+            }
+        }
+    }
+}
