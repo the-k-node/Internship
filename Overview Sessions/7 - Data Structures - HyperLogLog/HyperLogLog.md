@@ -57,15 +57,25 @@ R = max(p(x_1), p(x_2), ..., p(x_M)).
 
 - However, this requires each input `x_i` to pass through a number of independent hash functions, which is computationally expensive.
 
-- For example, assume the hash of our incoming datum looks like hash(input)=1011011101101100000. Let’s use the four leftmost bits (k = 4) to find the bucket index. The 4-bits are colored: 1011011101101100000, which tells us which bucket to update (1011 = 11 in decimal). So that input should update the 11th bucket. From the remaining, 1011011101101100000, we can obtain the longest run of consecutive 0s from the rightmost bits, which in this case is five. Thus, we would update bucket number 11 with a value of 5 as illustrated below, using 16 buckets.
+- **Durand and Flajolet** has proposed a solution to use a single hash function but use part of its output to split values into one of many buckets.
+- To break the input entry into `m` buckets, they suggest using the first few (`k`) bits of the hash value as an index and compute the longest sequence of consecutive 0s on what is left.
+
+- For example, assume the hash of our incoming datum looks like `hash(input)=1011011101101100000`.
+- Let’s use the four leftmost bits `k = 4` to find the bucket index.
+- The `4-bits` are colored: `red`, which tells us which bucket to update (1011 = `11`).
+- So that input should update the 11th bucket.
+- From the remaining, `011101101100000`, we can obtain the longest run of consecutive 0s from the rightmost bits, which in this case is **five**.
+- Thus, we would update bucket number 11 with a value of 5 as illustrated below, using 16 buckets.
 ![eg](https://engineering.fb.com/wp-content/uploads/2018/12/HLL5.png)
 
-- By having m buckets, we are basically simulating a situation in which we had m different hash functions. This costs us nothing in terms of accuracy but saves us from having to compute many independent hash functions. This procedure is called stochastic averaging. Finally, the formula below is used to get an estimate on the count of distinct values using the m bucket values \{R_1, R_2,..., R_m\}.
+- This costs us nothing in terms of accuracy but saves us from having to compute many independent hash functions.
+- This procedure is called **stochastic averaging**.
+- Finally, the formula below is used to get an estimate on the count of distinct values using the m bucket values `{R_1, R_2,..., R_m}`.
 
     ![card](https://s0.wp.com/latex.php?latex=%5Ctext%7BCARDINALITY%7D_%7B%5Ctext%7BLogLog%7D%7D+%3D+%5Ctext%7Bconstant%7D+%5Ccdot+m+%5Ccdot+2%5E%7B%5Cfrac%7B1%7D%7Bm%7D%5Csum_%7Bj%3D1%7D%5EN+R_j%7D&bg=f1f2f4&fg=000&s=1&c=20201002)
 
 - Statistical analysis has shown that the above estimator has a predictable bias towards larger estimates.
-- Durand-Flajolet derived the constant=0.79402 to correct this bias (the algorithm is called LogLog).
-- For m buckets, this reduces the standard error of the estimator to about ![sqrt](https://s0.wp.com/latex.php?latex=1.3%2F%5Csqrt%7Bm%7D&bg=f1f2f4&fg=000&s=1&c=20201002).
-- Thus, with 2,048 buckets where each bucket is 5 bits , we can expect an average error of about 2.8 percent.
-- 5 bits per bucket is enough to estimate cardinalities up to `2^{27}` per the original paper and requires only `2048 * 5 = 1.2 KB` of memory. That’s pretty good for basically 1 KB of memory.
+- **Durand-Flajolet** derived the **constant=0.79402** to correct this bias.
+- For `m` buckets, this reduces the standard error of the estimator to about ![sqrt](https://s0.wp.com/latex.php?latex=1.3%2F%5Csqrt%7Bm%7D&bg=f1f2f4&fg=000&s=1&c=20201002).
+- Thus, with `2,048` buckets where each bucket is `5` bits , we can expect an average error of about `2.8` percent.
+- 5 bits per bucket is enough to estimate cardinalities up to `2^27` per the original paper and requires only `2048 * 5 = 1.2 KB` of memory.
