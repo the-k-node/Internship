@@ -51,12 +51,11 @@ R = max(p(x_1), p(x_2), ..., p(x_M)).
 > Improving accuracy: LogLog
 
 - In order to improve the estimate, we can store many estimators instead of one and average the results.
-- This is illustrated in the graph below, where a single estimator’s variance is reduced by using multiple independent estimators and averaging out the results.
 ![imp_loglog](https://engineering.fb.com/wp-content/uploads/2018/12/HLL51.png)
 - We can achieve this by using m independent hash functions: `{h_1(x), h_2(x), ..., h_m(x)}`.
-- Having obtained the corresponding maximum number of consecutive zeros for each one: {R_1, R_2, ..., R_m}, our estimator becomes ![2pow](https://s0.wp.com/latex.php?latex=2%5E%7B%5Cbar%7BR%7D%7D+%3D+2%5E%7B%5Cfrac%7B1%7D%7Bm%7D%5Cleft%28R_1%2B...%2BR_m%5Cright%29%7D&bg=f1f2f4&fg=000&s=1&c=20201002).
+- For `{R_1, R_2, ..., R_m}`, our estimator becomes ![2pow](https://s0.wp.com/latex.php?latex=2%5E%7B%5Cbar%7BR%7D%7D+%3D+2%5E%7B%5Cfrac%7B1%7D%7Bm%7D%5Cleft%28R_1%2B...%2BR_m%5Cright%29%7D&bg=f1f2f4&fg=000&s=1&c=20201002).
 
-- However, this requires each input x_i to pass through a number of independent hash functions, which is computationally expensive. The workaround proposed by Durand and Flajolet is to use a single hash function but use part of its output to split values into one of many buckets. To break the input entry into m buckets, they suggest using the first few (k) bits of the hash value as an index into a bucket and compute the longest sequence of consecutive 0s on what is left (let’s denote the longest sequence as R).
+- However, this requires each input `x_i` to pass through a number of independent hash functions, which is computationally expensive.
 
 - For example, assume the hash of our incoming datum looks like hash(input)=1011011101101100000. Let’s use the four leftmost bits (k = 4) to find the bucket index. The 4-bits are colored: 1011011101101100000, which tells us which bucket to update (1011 = 11 in decimal). So that input should update the 11th bucket. From the remaining, 1011011101101100000, we can obtain the longest run of consecutive 0s from the rightmost bits, which in this case is five. Thus, we would update bucket number 11 with a value of 5 as illustrated below, using 16 buckets.
 ![eg](https://engineering.fb.com/wp-content/uploads/2018/12/HLL5.png)
