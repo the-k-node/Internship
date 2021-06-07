@@ -41,10 +41,16 @@
 
 - In other words, on average, a sequence of k consecutive zeros will occur once in every 2^k distinct entries.
 - To estimate the number of distinct elements using this pattern, all we need to do is record the length of the longest sequence of consecutive zeros.
-- Mathematically speaking, if we denote \rho(x_i) as the number of consecutive zeros in hash(x_i), the cardinality of the set \{x_1, x_2, ..., x_M\} is 2^R, where R = \max\left(\rho(x_1), \rho(x_2), ..., \rho(x_M)\right).
+- Mathematically speaking, if we denote (rho) `p(x_i)` as the number of consecutive zeros in `hash(x_i)`, the cardinality of the set `{x_1, x_2, ..., x_M}` is `2^R`, where
+```
+R = max(p(x_1), p(x_2), ..., p(x_M)).
+```
 
-There are two disadvantages to this method:
+- **But**, *There are two disadvantages to this method:*
 
-At best, this can give us a power of two estimate for the cardinality and nothing in between. Because of 2^R in the above formula, the resulting cardinalities can only be one of \{1, 2, 4, 8, 16, 32, ..., 1024, 2048, 4096, ...\}.
-The estimator still has high variability. Because it’s recording the maximum \rho(x_i), it requires only one entry whose hash value has too many consecutive zeros to produce a drastically inaccurate (overestimated) estimate of cardinality.
-On the plus side, the estimator has a very small memory footprint. We record only the maximum number of consecutive zeros seen. So to record a sequence of leading zeros up to 32 bits, the estimator needs only a 5-bit number for storage.
+  1. At best, this can give us a power of two estimate for the cardinality and nothing in between. Because of `2^R` in the above formula, the resulting cardinalities can only be one of `{1, 2, 4, 8, 16, 32, ..., 1024, 2048, 4096, ...}`.
+  2. The estimator still has high variability. Because it’s recording the maximum `p(x_i)`, it requires only one entry whose hash value has too many consecutive zeros to produce a drastically inaccurate (overestimated) estimate of cardinality.
+
+- On the plus side, the estimator has a very small memory footprint. We record only the maximum number of consecutive zeros seen. So to record a sequence of leading zeros up to 32 bits, the estimator needs only a 5-bit number for storage.
+
+> Improving accuracy: LogLog
