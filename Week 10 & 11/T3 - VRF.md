@@ -20,7 +20,7 @@
 
     * Delete the existing BGP system,
         ```nclu
-        # net del bgp autonomous-number 100
+        # net del bgp autonomous-system 100
         # net commit
         ```
 
