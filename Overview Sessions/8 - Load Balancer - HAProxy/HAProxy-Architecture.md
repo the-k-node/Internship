@@ -47,5 +47,6 @@
     - `http`
   - depending on the **mode** choosen, **proxy layer** gets changed.
   - using mode `tcp` becomes `layer 4` proxy
-  ![layer4]()
+  ![layer4](https://github.com/alwaysiamkk/Internship/blob/main/Overview%20Sessions/8%20-%20Load%20Balancer%20-%20HAProxy/layer_4_load_balancing.png)
   - using mode `http` becomes `layer 7` proxy
+  ![layer7](https://github.com/alwaysiamkk/Internship/blob/main/Overview%20Sessions/8%20-%20Load%20Balancer%20-%20HAProxy/layer_7_load_balancing.png)
