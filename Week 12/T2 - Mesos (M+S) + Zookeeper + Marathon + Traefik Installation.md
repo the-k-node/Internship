@@ -225,11 +225,11 @@ VM3-traefik | 192.168.100.242/24
 
   <br>
 
-  1. Make two files `id` & `hostname`, and add just the slave's bridge IP eg: **192.168.100.228** for accessing dashboard and see this node as slave/agent.
+  1. Make two files `ip` & `hostname`, and add just the slave's bridge IP eg: **192.168.100.228** for accessing dashboard and see this node as slave/agent.
 
     ```sh
-    $ vim /etc/mesos-slave/id
-    $ cp /etc/mesos-slave/id /etc/mesos-slave/hostname
+    $ vim /etc/mesos-slave/ip
+    $ cp /etc/mesos-slave/ip /etc/mesos-slave/hostname
     ```
 
     <br>
