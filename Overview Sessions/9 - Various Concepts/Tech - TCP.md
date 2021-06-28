@@ -15,7 +15,7 @@
 <br/>
 
 - The **IP data** section is the **TCP segment**, which itself contains **header** and **data** sections.
-- The TCP header contains many **more fields** than a **UDP header** and can range in size from **2020** to **6060 bytes**, depending on the size of the **options** field.
+- The TCP header contains many **more fields** than a **UDP header** and can range in size from **20** to **60 bytes**, depending on the size of the **options** field.
 - The TCP header shares some fields with the UDP header: **source port** number, **destination port** number, and **checksum**.
 
 ### How TCP Works?
