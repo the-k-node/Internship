@@ -36,3 +36,8 @@
 - Introduce variables that reflect real world events like servers that crash, hard drives that malfunction, network connections that are severed, etc.
 - Try to disprove the hypothesis by looking for a difference in steady state between the control group and the experimental group.
 - The harder it is to disrupt the steady state, the more confidence we have in the behavior of the system. If a weakness is uncovered, we now have a target for improvement before that behavior manifests in the system at large.
+
+
+# Testing in Production
+
+- Historically, companies have tried to ensure that the software they build has been thoroughly tested for bugs in development, staging and pre-production environments, well before it reaches users in production. Catching bugs early prevents users from seeing errors, increasing customer trust and overall satisfaction with a brand and its products.
