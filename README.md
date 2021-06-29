@@ -67,3 +67,7 @@
     * [Marathon](https://mesosphere.github.io/marathon/)
     * [Traefik](https://traefik.io)
     * [Nginx](https://www.nginx.com)
+
+* Project - W14:
+    * [Jenkins](https://www.jenkins.io/)
+    * [React JS](https://reactjs.org/)
