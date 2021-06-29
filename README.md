@@ -47,14 +47,14 @@
 * W7:
     * ansible + aerospike
 
-* W8 & W9:
+* W8:
     * [collectd](https://collectd.org)
     * aerospike
     * [influxdb](https://www.influxdata.com)
     * [grafana](https://grafana.com)
     * [riemann](https://riemann.io)
 
-* W10 & W11:
+* W10:
     * [cumulus VX](https://docs.nvidia.com/networking-ethernet-software/cumulus-vx/VirtualBox/)
     * e-bgp
     * [vxlan](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-43/Network-Virtualization/VXLAN-Routing/)
