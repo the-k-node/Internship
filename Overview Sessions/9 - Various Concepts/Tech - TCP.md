@@ -1,5 +1,7 @@
 # TCP :handshake:
 
+### Overview
+
 - The **Transmission Control Protocol (TCP)** is a transport protocol that is used **on top of IP** to **ensure reliable transmission of packets**.
 - TCP includes **mechanisms** to solve many of the problems that arise from packet-based messaging, such as **lost** packets, **out of order** packets, **duplicate** packets, and **corrupted** packets.
 - Since TCP is the protocol used most commonly on top of IP, the Internet protocol stack is sometimes referred to as **TCP/IP**.
@@ -15,7 +17,7 @@
 <br/>
 
 - The **IP data** section is the **TCP segment**, which itself contains **header** and **data** sections.
-- The TCP header contains many **more fields** than a **UDP header** and can range in size from **20** to **60 bytes**, depending on the size of the **options** field.
+- The TCP header contains many **more fields** than a **UDP header** and can range in size from **202020** to **606060 bytes**, depending on the size of the **options** field.
 - The TCP header shares some fields with the UDP header: **source port** number, **destination port** number, and **checksum**.
 
 ### How TCP Works?
@@ -37,13 +39,13 @@
 - The *second* computer **sends back** a packet with the **ACK bit** set to **111** where *ACK = "acknowledge!"* plus the **SYN bit** set to **111**.
 - The *first* computer **replies back** with an **ACK**.
 - The **SYN** and **ACK** bits are both part of the TCP header:
-  
+
   <br/>
-  
+
   ![SYN_ACK_header](https://github.com/alwaysiamkk/Internship/blob/main/Overview%20Sessions/9%20-%20Various%20Concepts/tcp3%20-%20syn%20%26%20ack%20bits.svg)
-  
+
   <br/>
-  
+
 - In fact, the three packets involved in the three-way handshake **do not** typically include any **data**.
 - Once the computers are **done** with the handshake, they're ready to **receive packets containing actual data**.
 
@@ -60,13 +62,13 @@
 - The *first* computer **sends** a **packet with data** and a **sequence number**.
 - The *second* computer **acknowledges** it by setting the **ACK** bit and increasing the acknowledgement number by the **length** of the received data.
 - The sequence and acknowledgement numbers are part of the TCP header:
-  
+
   <br/>
-  
+
   ![SEQ_ACK_numbers](https://github.com/alwaysiamkk/Internship/blob/main/Overview%20Sessions/9%20-%20Various%20Concepts/tcp5%20-%2032bit%20seq%20%26%20ack.svg)
-  
+
   <br/>
-  
+
 - Those two numbers help the computers to keep track of which data was **successfully** **received**, which data was **lost**, and which data was **accidentally sent twice**.
 
 #### Step 3: Close the connection
@@ -112,21 +114,21 @@
 - In the situation pictured above, the recipient sees a *sequence number* of **#73** but expected a sequence number of **#37**.
 - The *recipient* lets the *sender* know there's something amiss by sending a packet with an **acknowledgement number set to the expected sequence number**.
 - Sometimes the missing packet is simply taking a *slower route* through the Internet and it arrives soon after.
-  
+
   <br/>
-  
+
   ![slower_route](https://github.com/alwaysiamkk/Internship/blob/main/Overview%20Sessions/9%20-%20Various%20Concepts/tcp9%20-%20miss1.svg)
-  
+
   <br/>
-  
+
 - Other times, the missing packet may actually be a **lost packet** and the sender must **retransmit** the packet.
-  
+
   <br/>
-  
+
   ![lost_and_retransmit](https://github.com/alwaysiamkk/Internship/blob/main/Overview%20Sessions/9%20-%20Various%20Concepts/tcp10%20-%20miss2.svg)
-  
+
   <br/>
-  
+
 - In both situations, the *recipient* has to **deal** with out of order packets.
 - The recipient can use the **sequence numbers** to **reassemble** the packet data in the **correct** order.
 
