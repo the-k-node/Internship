@@ -71,4 +71,4 @@
 * Project - W14:
     * [Jenkins](https://www.jenkins.io/)
     * [React JS](https://reactjs.org/)
-    * [Final Presentation](https://docs.google.com/presentation/d/119Ju1oZreHg-AoCYBeaW7qNXXJ88Yc3a/edit#slide=id.p4)
+    * [Final Presentation](https://docs.google.com/presentation/d/119Ju1oZreHg-AoCYBeaW7qNXXJ88Yc3a/edit#slide=id.p1)
