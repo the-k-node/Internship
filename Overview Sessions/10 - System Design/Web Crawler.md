@@ -38,7 +38,7 @@
 such continuous crawling, a crawler should be able to crawl a page with a frequency that approximates the rate of change of that page.
 6. **Extensible**: Crawlers should be designed to be extensible in many ways – to cope with new data formats, new fetch protocols, and so on. This demands that the crawler architecture be modular.
 
-### **Necessary Features** for Web Crawler
+### **Necessary Features**
 
 1. **Crawling Frequency**: Also known as crawl rate, or crawl frequency refers to how often you want to crawl a website. You can have different crawl rates for different websites. For example, news websites might need to be crawled more often.
 2. **Dedup**: Where multiple crawlers are used, they may add duplicate links to the same URL pool. Dedup or duplicate detection involves the use of a space-efficient system, like Bloom Filter, to detect duplicate links, so your design isn’t crawling the same sites.
@@ -47,3 +47,28 @@ such continuous crawling, a crawler should be able to crawl a page with a freque
     50 B x 100 KBytes = 5 petabytes
 You would need around 5 petabytes of storage, give or take 2 petabytes, to hold the information on the web.
 You can compress the documents to save storage since you’ll not need to refer to it every time. For certain applications, such as search engines, you may only need to extract the metadata information before compressing it. When you do need the entire content of the page, you can access it through the cached file.
+
+
+### **Algorithm Execution**
+
+The **basic algorithm** executed by any Web crawler is to take a list of **seed URLs** as its **input** and **repeatedly execute** the following steps.
+
+1. Pick a **URL** from the **unvisited URL list**.
+2. Determine the **IP Address** of its **host-name**.
+3. Establish a connection to the **host** to **download the corresponding document**.
+4. Parse the document contents to look for **new** URLs.
+5. Add the new URLs to the list of **unvisited URLs**.
+6. Process the downloaded document, eg: store it or index its contents.
+7. Go back to step 1.
+
+### **High-Level** Design
+
+<img src="https://i.ibb.co/yVrwc7V/crawler-1.png" alt="crawler-1" border="0" width="1000">
+
+### **Detailed Component** Design
+
+<img src="https://i.ibb.co/DDpw5fY/c-design-1.png" alt="c-design-1" border="0" width="1000">
+
+### **URL Frontier** Design
+
+<img src="https://i.ibb.co/YZ8m3R1/url-frontier-des.png" alt="url-frontier-des" border="0">
