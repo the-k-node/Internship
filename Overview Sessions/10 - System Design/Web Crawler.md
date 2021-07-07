@@ -43,10 +43,15 @@ such continuous crawling, a crawler should be able to crawl a page with a freque
 1. **Crawling Frequency**: Also known as crawl rate, or crawl frequency refers to how often you want to crawl a website. You can have different crawl rates for different websites. For example, news websites might need to be crawled more often.
 2. **Dedup**: Where multiple crawlers are used, they may add duplicate links to the same URL pool. Dedup or duplicate detection involves the use of a space-efficient system, like Bloom Filter, to detect duplicate links, so your design isn’t crawling the same sites.
 3. **Protocols**: Think about the protocols that your crawler will cater to. A basic crawler can handle HTTP links, but you can also modify the application to work over STMP or FTP.
-4. **Capacity**: Each page that is crawled will carry several URLs to index. Assume an estimate of around 50 billion pages. Assuming an average page size of 100kb:
-    50 B x 100 KBytes = 5 petabytes
-You would need around 5 petabytes of storage, give or take 2 petabytes, to hold the information on the web.
-You can compress the documents to save storage since you’ll not need to refer to it every time. For certain applications, such as search engines, you may only need to extract the metadata information before compressing it. When you do need the entire content of the page, you can access it through the cached file.
+4. **Capacity**:
+    - Each page that is **crawled** will carry several **URLs to index**.
+    - Assume an estimate of around `50 billion` pages.
+    - Assuming an average page size of `100kb`:
+        `50 B x 100 KBytes = 5 petabytes`
+    - You would need around `5 petabytes` of storage.
+    - We can **compress** the documents to save storage since you’ll not need to refer to it every time.
+    - For certain applications, such as search engines, you may only need to extract the **metadata** information before compressing it.
+    - When you do need the entire content of the page, you can access it through the **cached file**.
 
 
 ### **Algorithm Execution**
