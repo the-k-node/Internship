@@ -58,12 +58,16 @@ A bare minimum crawler needs at least these components:
     iv. **Duplicate Eliminator**: To make sure the same content is not extracted twice unintentionally.
     v. **Datastore**: To store retrieved pages, URLs, and other metadata.
 
+<a href="https://ibb.co/b6FqDSV"><img src="https://i.ibb.co/2FSmHDr/crawler-1.png" alt="crawler-1" border="0"></a>
+
 ### 6. **Detailed Component Design**
 Let’s assume our crawler is running on one server and all the crawling is done by multiple working threads where each working thread performs all the steps needed to download and process a document in a loop.
 The first step of this loop is to remove an absolute URL from the shared URL frontier for downloading. An absolute URL begins with a scheme (e.g., “HTTP”) which identifies the network protocol that should be used to download it. We can implement these protocols in a modular way for extensibility, so that later if our crawler needs to support more protocols, it can be easily done. Based on the URL’s scheme, the worker calls the appropriate protocol module to download the document. After downloading, the document is placed into a Document Input Stream (DIS). Putting documents into DIS will enable other modules to re-read the document multiple times.
 Once the document has been written to the DIS, the worker thread invokes the dedupe test to determine whether this document (associated with a different URL) has been seen before. If so, the document is not processed any further and the worker thread removes the next URL from the frontier.
 Next, our crawler needs to process the downloaded document. Each document can have a different MIME type like HTML page, Image, Video, etc. We can implement these MIME schemes in a modular way, so that later if our crawler needs to support more types, we can easily implement them. Based on the downloaded document’s MIME type, the worker invokes the process method of each processing module associated with that MIME type.
 Furthermore, our HTML processing module will extract all links from the page. Each link is converted into an absolute URL and tested against a user-supplied URL filter to determine if it should be downloaded. If the URL passes the filter, the worker performs the URL-seen test, which checks if the URL has been seen before, namely, if it is in the URL frontier or has already been downloaded. If the URL is new, it is added to the frontier.
+
+<a href="https://ibb.co/yWMdzg2"><img src="https://i.ibb.co/syDbTs7/crawler-detailed-2.png" alt="crawler-detailed-2" border="0"></a>
 
  Let’s discuss these components one by one, and see how they can be distributed onto multiple machines:
 1. The URL frontier: The URL frontier is the data structure that contains all the URLs that remain to be downloaded. We can crawl by performing a breadth-first traversal of the Web, starting from the pages in the seed set. Such traversals are easily implemented by using a FIFO queue.
