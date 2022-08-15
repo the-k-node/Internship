@@ -2,6 +2,8 @@
 
 > SRE - Intern
 
+![alt text](https://securecdn.pymnts.com/wp-content/uploads/2020/01/Score-Card-Company-Image-25.png "Company")
+
 >### Tasks
 
 * [Week 1](https://github.com/alwaysiamkk/Internship/tree/main/Week%201)
